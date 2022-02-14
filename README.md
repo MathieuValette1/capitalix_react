@@ -1,3 +1,3 @@
-# capitalix_react
+# capitalix
 
 By Deno & Mathieu
