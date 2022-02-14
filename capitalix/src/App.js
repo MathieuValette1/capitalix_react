@@ -1,6 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 
+const [services, setServices] = useState(new Services(""))
+const [world, setWorld] = useState(new World())
+
+
 function App() {
   return (
     <div className="App">
