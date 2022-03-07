@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Services } from './service';
 import { World } from './world';
 import Product from './Product';
-//import React, { useState } from 'react'
+import { useState, useEffect } from 'react';
 
 function App() {
     const [services, setServices] = useState(new Services(""))
@@ -23,7 +22,7 @@ function App() {
     return (
         <div className="App">
             <div className="header">
-                <div> logo monde <img src={services.server + world.logo}/><span> {world.name} </span></div>
+                <div> <img id="logoMonde" src={services.server + world.logo}/><span> {world.name} </span></div>
                 <div> argent </div>
                 <div> multiplicateur </div>
                 <div> ID du joueur </div>

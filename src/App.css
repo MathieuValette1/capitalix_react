@@ -50,3 +50,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+#logoMonde{
+  max-width: 30%;
+  height: auto;
+}
