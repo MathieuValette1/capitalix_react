@@ -52,6 +52,34 @@
 }
 
 #logoMonde{
-  max-width: 30%;
+  max-width: 20%;
   height: auto;
+  vertical-align: middle;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+  background-color: #555;
+  color: white;
+}
+
+.header {
+  height: 7em; /* hauteur du parent */
+  line-height: 7em; /* hauteur de ligne (identique) */
+  white-space: nowrap; /* interdiction de passer à la ligne */
 }
