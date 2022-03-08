@@ -1,5 +1,5 @@
 import { Services } from "./service"
-import { Product } from "./world"
+import { Product, World } from "./world"
 
 type ProductProps = {
     prod: Product
