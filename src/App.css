@@ -1,3 +1,18 @@
+body::after {
+  content: "";
+  background: url(../src/images/fond.gif);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% auto;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
 .App {
   text-align: center;
 }
@@ -40,6 +55,7 @@
 .header {
   display: grid;
   grid-template-columns: 25% 25% 30% 20%;
+  /*background-image: linear-gradient(180deg, rgba(255,255,255,0) 0, rgb(255, 51, 0) 100%);*/
 }
 
 .main {
@@ -83,3 +99,11 @@ li a:hover {
   line-height: 7em; /* hauteur de ligne (identique) */
   white-space: nowrap; /* interdiction de passer à la ligne */
 }
+
+#worldName {
+  color: red;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 50px;
+  vertical-align: middle;
+}
+
