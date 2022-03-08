@@ -38,12 +38,9 @@ function App() {
                     </ul></nav>
                 </div>
             <div className="product">
-                <div> <Product prod={ world.products.product[0] } services={ services }/>premier produit </div>
-                <div> <Product prod={ world.products.product[1] } services={ services }/>second produit </div>
-                <div> <Product prod={ world.products.product[2] } services={ services }/>troisième produit </div>
-                <div> <Product prod={ world.products.product[3] } services={ services }/>quatrième produit </div>
-                <div> <Product prod={ world.products.product[4] } services={ services }/>cinquième produit </div>
-                <div> <Product prod={ world.products.product[5] } services={ services }/>sixième produit </div>
+                {world.products.product.map( p =>
+                    <Product prod={ p } services={ services }/>
+                    )}
             </div>
             </div>
         </div>
