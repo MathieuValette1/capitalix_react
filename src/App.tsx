@@ -22,8 +22,8 @@ function App() {
     return (
         <div className="App">
             <div className="header">
-                <div> <img id="logoMonde" src={services.server + world.logo}/><span> {world.name} </span></div>
-                <div> argent </div>
+                <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span> {world.name} </span></div>
+                <div> {world.money} </div>
                 <div> multiplicateur </div>
                 <div> ID du joueur </div>
             </div>

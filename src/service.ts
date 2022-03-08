@@ -3,7 +3,7 @@ import { World } from "./world";
 
 export class Services {
     //server = "https://isiscapitalist.kk.kurasawa.fr/"
-    server = "http://localhost:8080/adventureisis/generic/world"
+    server = "http://localhost:8080/"
     api = this.server + "adventureisis/generic";
     user = "";
     constructor(user: string) {
