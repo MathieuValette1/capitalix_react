@@ -6,9 +6,10 @@ import './Product.css'
 
 type ProductProps = {
     prod: Product
+    onProductionDone: (product: Product) => void
     services: Services
 }
-export default function ProductComponent({ prod, services }: ProductProps) {
+export default function ProductComponent({ prod, services, onProductionDone }: ProductProps) {
     const [progress, setProgress] = useState(0)
 
     const savedCallback = useRef(calcScore)
@@ -21,21 +22,23 @@ export default function ProductComponent({ prod, services }: ProductProps) {
     }, [])
 
     function startFabrication(){
-        console.log("Icone cliquée")
-        console.log(prod.name)
-        prod.timeleft = prod.vitesse
-        prod.lastupdate = Date.now()
+        if (prod.quantite>0) {
+            console.log("Icone cliquée")
+            console.log(prod.name)
+            prod.timeleft = prod.vitesse
+            prod.lastupdate = Date.now()
+        }
     }
 
     function calcScore(){
         if (prod.timeleft == 0){
-            console.log(prod.name + " n'est pas en production")
+            //console.log(prod.name + " n'est pas en production")
             setProgress(0)
         }
         else{
             let time_since_last_update = Date.now() - prod.lastupdate
             prod.lastupdate = Date.now()
-            console.log('TIMELEFT: ', prod.timeleft)
+            //console.log('TIMELEFT: ', prod.timeleft)
             prod.timeleft -= time_since_last_update
 
             if(prod.timeleft<=0){
@@ -44,12 +47,13 @@ export default function ProductComponent({ prod, services }: ProductProps) {
                 let revenu = prod.revenu
                 // Remettre la barre de progression à 0
                 prod.progressbarvalue = 0
+                onProductionDone(prod)
             }
             else{
-                console.log("Production pas finie")
+                //console.log("Production pas finie")
                 // Faire progresser la ProgressBar
                 prod.progressbarvalue = ((prod.vitesse - prod.timeleft) / prod.vitesse) * 100
-                console.log("Barre de progression: "+ progress + "%")
+                //console.log("Barre de progression: "+ progress + "%")
             }
             setProgress(prod.progressbarvalue)
         }

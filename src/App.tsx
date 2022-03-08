@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { Services } from './service';
-import { World } from './world';
-import Product from './Product';
+import { Product, World } from './world';
+import ProductComponent from './Product';
 import { useState, useEffect, useRef } from 'react';
 import {transform} from "./utils";
 
@@ -21,6 +21,19 @@ function App() {
        
     }, [])
 
+    function onProductionDone(p: Product): void {
+        // calcul de la somme obtenue par la production du produit
+        let gain = p.revenu
+        // ajout de la somme à l’argent possédé
+        addToScore(gain)
+    }
+
+    function addToScore(gain: number): void{
+        console.log("Score ")
+        console.log(world.score)
+        world.score += gain
+    }
+
 
     return (
         <div className="App">
@@ -30,6 +43,8 @@ function App() {
                 <span dangerouslySetInnerHTML={{__html: transform(world.money)}}/>
                 <div> <button type="button">multiplicateur</button></div>
                 <div> ID du joueur </div>
+                <span dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
+
             </div>
             <div className="main">
                 <div>
@@ -43,7 +58,8 @@ function App() {
                 </div>
             <div className="products">
                 {world.products.product.map( p =>
-                    <Product prod={ p } services={ services }/>
+                    <ProductComponent prod={ p } services={ services }  onProductionDone={onProductionDone}
+                    />
                     )}
             </div>
             </div>
