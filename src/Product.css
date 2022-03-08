@@ -1,11 +1,33 @@
-.productLogo {
-    max-width: 40%;
-    height: auto;
-    vertical-align: middle;
+.product {
+    display: grid;
+    grid-template-columns: 30% auto auto;
+    grid-gap: 5px;
 }
 
-.product {
-    /*border: 5px solid gray;*/
-    background-color: azure;
-    border-radius: 25%;
+.productLogo {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    grid-column: 1;
+    grid-row: 1/5;
+}
+
+.trois {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.quatre {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.cinq {
+    grid-column: 2/4;
+    grid-row: 2;
+}
+
+.six {
+    grid-column: 2/4;
+    grid-row: 3;
 }

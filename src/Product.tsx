@@ -9,11 +9,14 @@ type ProductProps = {
 export default function ProductComponent({ prod, services }: ProductProps) {
     return (
         <div className="product">
-            <img className="productLogo" src={services.server + prod.logo} alt={prod.logo}/><span> {prod.name} </span>
-            <div><span>Quantité: {prod.quantite} </span>
-                <span>Temps: {prod.timeleft} </span>
-                <span>Revenu: {prod.revenu} </span></div>
-            <div><span>Prix: {prod.cout} </span><span>Vitesse: {prod.vitesse}</span></div>
+                <div className="trois">{prod.name}</div>
+                <img className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
+                <div className="quatre">Quantité: {prod.quantite}</div>
+                <div className="cinq">Revenu: {prod.revenu}</div>
+                <div className="six">
+                    <span>Prix: {prod.cout} </span>
+                    <span>Temps: {prod.timeleft} </span>
+                </div>
         </div>
     )
 }
