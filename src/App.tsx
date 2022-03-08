@@ -4,6 +4,7 @@ import { Services } from './service';
 import { World } from './world';
 import Product from './Product';
 import { useState, useEffect } from 'react';
+import {transform} from "./utils";
 
 function App() {
     const [services, setServices] = useState(new Services(""))
@@ -23,7 +24,7 @@ function App() {
         <div className="App">
             <div className="header">
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span> {world.name} </span></div>
-                <div> {world.money} </div>
+                <span dangerouslySetInnerHTML={{__html: transform(world.money)}}/>
                 <div> multiplicateur </div>
                 <div> ID du joueur </div>
             </div>
