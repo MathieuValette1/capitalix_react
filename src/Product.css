@@ -4,6 +4,16 @@
     grid-gap: 5px;
 }
 
+.productInfo {
+    grid-column: 1;
+    grid-row: 1/6;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-gap: 5px;
+    position: relative;
+    text-align: center;
+}
+
 .productLogo {
     max-width: 100%;
     height: auto;
@@ -12,22 +22,34 @@
     grid-row: 1/5;
 }
 
-.trois {
+.qte {
+    position: absolute;
+    bottom: -10%;
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 4;
+    background-color: gray;
+    border-radius: 20px;
+    padding: 5px 30px 5px 30px;
+    width: auto;
+    height: auto;
 }
 
-.quatre {
-    grid-column: 1;
+.revenu {
+    grid-column: 2/4;
+    grid-row: 3;
+}
+
+.prixStand {
+    grid-column: 2;
     grid-row: 4;
 }
 
-.cinq {
-    grid-column: 2/4;
-    grid-row: 2;
+.temps {
+    grid-column: 3;
+    grid-row: 4;
 }
 
-.six {
+.progressBar {
     grid-column: 2/4;
-    grid-row: 3;
+    grid-row: 2;
 }
