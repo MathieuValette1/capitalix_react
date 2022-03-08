@@ -13,17 +13,15 @@ export default function ProductComponent({ prod, services }: ProductProps) {
 
     return (
         <div className="product">
-                <div className="trois">{prod.name}</div>
+            <div className="productInfo">
                 <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
-                <div className="quatre">Quantité: {prod.quantite}</div>
-                <div className="cinq">Revenu: {prod.revenu}</div>
-                <div className="six">
-                    <span>Prix: {prod.cout} </span>
-                    <span>Temps: {prod.timeleft} </span>
-                </div>
-                <div className="progressBar">
-                <ProgressBar transitionDuration={"0.1s"} customLabel={" "}
-                             completed={progress}/>
+                <div className="qte">Quantité: {prod.quantite}</div>
+            </div>
+            <div className="revenu">Revenu: {prod.revenu}</div>
+            <div className="prixStand"><button type="button"> Prix: {prod.cout} </button></div>
+            <div className="temps">Temps: {prod.vitesse}s</div>
+            <div className="progressBar">
+                <ProgressBar transitionDuration={"0.1s"} customLabel={" "} completed={progress}/>
             </div>
         </div>
     )

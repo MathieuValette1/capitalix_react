@@ -25,7 +25,7 @@ function App() {
             <div className="header">
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span> {world.name} </span></div>
                 <span dangerouslySetInnerHTML={{__html: transform(world.money)}}/>
-                <div> multiplicateur </div>
+                <div> <button type="button">multiplicateur</button></div>
                 <div> ID du joueur </div>
             </div>
             <div className="main">
