@@ -37,7 +37,7 @@ function App() {
                         <li><a href="">Angels</a></li>
                     </ul></nav>
                 </div>
-            <div className="product">
+            <div className="products">
                 {world.products.product.map( p =>
                     <Product prod={ p } services={ services }/>
                     )}

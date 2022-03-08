@@ -1,5 +1,6 @@
 import { Services } from "./service"
 import { Product, World } from "./world"
+import './Product.css'
 
 type ProductProps = {
     prod: Product
@@ -7,7 +8,7 @@ type ProductProps = {
 }
 export default function ProductComponent({ prod, services }: ProductProps) {
     return (
-        <div>
+        <div className="product">
             <img className="productLogo" src={services.server + prod.logo} alt={prod.logo}/><span> {prod.name} </span>
             <div><span>Quantité: {prod.quantite} </span>
                 <span>Temps: {prod.timeleft} </span>
