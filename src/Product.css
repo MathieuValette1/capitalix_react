@@ -1,0 +1,11 @@
+.productLogo {
+    max-width: 40%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.product {
+    /*border: 5px solid gray;*/
+    background-color: azure;
+    border-radius: 25%;
+}

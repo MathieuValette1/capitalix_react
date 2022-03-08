@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Services } from "./service"
 import { Product, World } from "./world"
 import ProgressBar from "./ProgressBar"
+import './Product.css'
 
 type ProductProps = {
     prod: Product
@@ -11,7 +12,8 @@ export default function ProductComponent({ prod, services }: ProductProps) {
     const [progress, setProgress] = useState(0)
 
     return (
-        <div>
+
+        <div  className="product">
             <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/><span> {prod.name} </span>
             <div><span>Quantité: {prod.quantite} </span>
                 <span>Temps: {prod.timeleft} </span>

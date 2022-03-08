@@ -46,7 +46,7 @@
   display: grid;
   grid-template-columns: 20% 80%;
 }
-.product {
+.products {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
