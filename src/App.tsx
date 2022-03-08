@@ -28,7 +28,15 @@ function App() {
                 <div> ID du joueur </div>
             </div>
             <div className="main">
-                <div> liste des boutons de menu </div>
+                <div>
+                    <nav><ul>
+                        <li><a href="/">My World</a></li>
+                        <li><a href="">Unlocks</a></li>
+                        <li><a href="">Managers</a></li>
+                        <li><a href="">Upgrades</a></li>
+                        <li><a href="">Angels</a></li>
+                    </ul></nav>
+                </div>
             <div className="product">
                 <div> <Product prod={ world.products.product[0] } services={ services }/>premier produit </div>
                 <div> <Product prod={ world.products.product[1] } services={ services }/>second produit </div>
