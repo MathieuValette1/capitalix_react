@@ -1,6 +1,6 @@
 export function transform(valeur: number): string {
     let res : string = "";
-    if (valeur < 1000)
+    if (valeur < 5000)
         res = valeur.toFixed(2);
     else if (valeur < 1000000)
         res = valeur.toFixed(0);

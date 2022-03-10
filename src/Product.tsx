@@ -8,8 +8,10 @@ type ProductProps = {
     prod: Product
     onProductionDone: (product: Product) => void
     services: Services
+    qtmulti: number
+    worldMoney: number
 }
-export default function ProductComponent({ prod, services, onProductionDone }: ProductProps) {
+export default function ProductComponent({ prod, services, onProductionDone, worldMoney, qtmulti }: ProductProps) {
     const [progress, setProgress] = useState(0)
 
     const savedCallback = useRef(calcScore)
@@ -20,6 +22,12 @@ export default function ProductComponent({ prod, services, onProductionDone }: P
             if (timer) clearInterval(timer)
         }
     }, [])
+
+    /// Si le bouton commutateur est sur xMax, on calcule la qte max achetable
+    if (qtmulti != 1 && qtmulti != 10 && qtmulti != 100 ){
+        console.log("on t'appelle")
+        calcMaxCanBuy()
+    }
 
     function startFabrication(){
         if (prod.quantite>0) {
@@ -48,6 +56,7 @@ export default function ProductComponent({ prod, services, onProductionDone }: P
                 // Remettre la barre de progression à 0
                 prod.progressbarvalue = 0
                 onProductionDone(prod)
+                calcMaxCanBuy()
             }
             else{
                 //console.log("Production pas finie")
@@ -59,6 +68,16 @@ export default function ProductComponent({ prod, services, onProductionDone }: P
         }
     }
 
+    function calcMaxCanBuy(): void{
+        /// Calcule le maximum de produit qui peut être acheté avec l'argent actuel
+        let money = worldMoney
+        let c = prod.croissance
+
+        let n = Math.round(Math.log(1-money*(1-c)/prod.cout)/Math.log(c))
+
+        qtmulti = n
+    }
+
     return (
         <div className="product">
             <div className="productInfo">
@@ -66,7 +85,9 @@ export default function ProductComponent({ prod, services, onProductionDone }: P
                 <div className="qte">Quantité: {prod.quantite}</div>
             </div>
             <div className="revenu">Revenu: {prod.revenu}</div>
-            <div className="prixStand"><button type="button"> Prix: {prod.cout} </button></div>
+            <div className="prixStand">
+                <button type="button">x{qtmulti} Prix: {qtmulti * prod.cout} </button>
+            </div>
             <div className="temps">Temps: {prod.vitesse}s</div>
             <div className="progressBar">
                 <ProgressBar transitionDuration={"0.1s"} customLabel={" "} completed={progress}/>
