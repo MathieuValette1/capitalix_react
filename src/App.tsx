@@ -5,6 +5,7 @@ import { Product, World } from './world';
 import ProductComponent from './Product';
 import { useState, useEffect, useRef } from 'react';
 import {transform} from "./utils";
+import Manager from './Manager';
 
 function App() {
     const [services, setServices] = useState(new Services(""))
@@ -34,6 +35,10 @@ function App() {
         world.score += gain
     }
 
+    function afficheManager(){
+        
+    }
+
 
     return (
         <div className="App">
@@ -49,19 +54,21 @@ function App() {
             <div className="main">
                 <div>
                     <nav><ul>
-                        <li><a href="/">My World</a></li>
-                        <li><a href="">Unlocks</a></li>
-                        <li><a href="">Managers</a></li>
-                        <li><a href="">Upgrades</a></li>
-                        <li><a href="">Angels</a></li>
+                        <li>My World</li>
+                        <li>Unlocks</li>
+                        <li onClick={afficheManager}>Managers</li>
+                        <li>Upgrades</li>
+                        <li>Angels</li>
                     </ul></nav>
                 </div>
-            <div className="products">
-                {world.products.product.map( p =>
-                    <ProductComponent prod={ p } services={ services }  onProductionDone={onProductionDone}
-                    />
+                <div className="products">
+                    {world.products.product.map( p =>
+                        <ProductComponent prod={ p } services={ services }  onProductionDone={onProductionDone}/>
                     )}
-            </div>
+                </div>
+                <div className='managers'>
+                    <Manager world={world} services={services}/>
+                </div>
             </div>
         </div>
     );
