@@ -1,6 +1,9 @@
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+
 body::after {
   content: "";
-  background: url(../src/images/fond.gif);
+  background: url(../src/images/fond.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% auto;

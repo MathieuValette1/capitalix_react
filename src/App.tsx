@@ -37,7 +37,7 @@ function App() {
 
     return (
         <div className="App">
-            <img className='backgroundImg' src=''></img>
+            <img className="backgroundImg" src=''></img>
             <div className="header">
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span id="worldName"> {world.name} </span></div>
                 <span dangerouslySetInnerHTML={{__html: transform(world.money)}}/>
