@@ -1,3 +1,4 @@
+import logo from './logo.svg';
 import './App.css';
 import { Services } from './service';
 import { Product, World } from './world';
@@ -21,8 +22,6 @@ function App() {
         )
 
     }, [])
-
-
 
     function onProductionDone(p: Product): void {
         // calcul de la somme obtenue par la production du produit
