@@ -67,10 +67,13 @@ function App() {
         console.log(gain)
         addToScore(gain)
         updateMoney(gain)
+        services.putProduct(p)
     }
 
-    function onProductBuy(cost:number):void{
+    function onProductBuy(cost:number, product:Product):void{
         updateMoney(-cost)
+        /// On transmet toutes ces modifs au serveur
+        services.putProduct(product)
     }
 
     function updateMoney(gain:number){

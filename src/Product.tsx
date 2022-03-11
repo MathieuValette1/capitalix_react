@@ -7,7 +7,7 @@ import './Product.css'
 type ProductProps = {
     prod: Product
     onProductionDone: (product: Product) => void
-    onProductBuy: (cost: number) => void
+    onProductBuy: (cost: number, product:Product) => void
     services: Services
     qtmulti: number
     worldMoney: number
@@ -66,36 +66,22 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         }
     }
 
-    // function isBuyable():void{
-    //     if (worldMoney > costOfNProduct(qtmulti)){
-    //         setProdISBuyable
-    //     }
-    //     else{
-    //         setProdISBuyable(false)
-    //         return false
-    //     }
-    // }
-
     function calcMaxCanBuy(): void{
         /// Calcule le maximum de produit qui peut être acheté avec l'argent actuel
         let money = worldMoney
         let c = prod.croissance
         if (qtmulti == 1){
             qtmulti = 1
-            // isBuyable()
         }
         else if (qtmulti == 10){
             qtmulti = 10
-            // isBuyable()
         }
         else if (qtmulti == 100){
             qtmulti = 100
-            // isBuyable()
         }
         else {
-            let n = Math.round(Math.log(1 - money * (1 - c) / prod.cout) / Math.log(c))
+            let n = Math.floor(Math.log(1 - money * (1 - c) / prod.cout) / Math.log(c))
             qtmulti = n
-            // isBuyable()
         }
     }
 
@@ -103,7 +89,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         /// Calcule le cout de n produits
 
         console.log(n)
-        return prod.cout * (1 - Math.pow(prod.croissance, n))/ (1 - prod.croissance)
+        return Math.floor(prod.cout * (1 - Math.pow(prod.croissance, n))/ (1 - prod.croissance))
 
     }
 
@@ -114,16 +100,14 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         setQuantite(prod.quantite)
         /// On calcule le prix de l'achat et on l'envoie au composant parent
         let cost = costOfNProduct(qtmulti)
-        onProductBuy(cost)
         // On calcule le nouveau prix et on met à jour l'affichage
         prod.cout = prod.cout*Math.pow(prod.croissance, qtmulti)
-        setCost(prod.cout)
+        setCost(Math.floor(prod.cout))
         // On calcule le nouveau revenu du produit et on met à jour l'affichage
         prod.revenu = prod.cout * prod.quantite
-        setRevenu(prod.revenu)
-
-        /// On transmet toutes ces modifs au serveur
-        services.putProduct(prod)
+        setRevenu(Math.floor(prod.revenu))
+        /// On transmet au parent
+        onProductBuy(cost, prod)
     }
 
     return (
@@ -134,7 +118,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
             </div>
             <div className="revenu">Revenu: {revenu}</div>
             <div className="prixStand">
-                <button type="button" onClick={buyProduct}>
+                <button type="button" onClick={buyProduct} disabled={worldMoney < costOfNProduct(qtmulti) || qtmulti==0}>
                     x{qtmulti} Prix: {costOfNProduct(qtmulti)}
                 </button>
             </div>
