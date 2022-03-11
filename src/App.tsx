@@ -8,8 +8,7 @@ import {transform} from "./utils";
 import Manager from './Manager';
 import Unlocks from './Unlocks';
 import Upgrades from './Upgrades';
-import Angels from './Unlocks';
-
+import Angels from './Angels';
 
 function App() {
     const [services, setServices] = useState(new Services(""))
@@ -60,11 +59,12 @@ function App() {
         setUsername(username)
     }, [])
 
-
     function onProductionDone(p: Product): void {
         // calcul de la somme obtenue par la production du produit
         let gain = p.revenu
         // ajout de la somme à l’argent possédé
+        console.log("Gain")
+        console.log(gain)
         addToScore(gain)
         updateMoney(gain)
     }
@@ -138,8 +138,6 @@ function App() {
     }
 
 
-
-
     return (
         <div className="App">
             <div className="header">
@@ -202,7 +200,7 @@ function App() {
                                 />
                     </div>
                 } </div>
-                {/* <div> { showAngels &&
+                <div> { showAngels &&
                     <div className='angels'>
                         <Angels world={world}
                                 services={services}
@@ -210,9 +208,9 @@ function App() {
                                 hideAngels={hideAngels}
                                 />
                     </div>
-                } </div> */}
+                } </div>
             </div>
-        </div>
+
     );
 }
 
