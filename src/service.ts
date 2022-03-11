@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosPromise } from "axios";
-import { World } from "./world";
+import {Product, World } from "./world";
 
 export class Services {
     //server = "https://isiscapitalist.kk.kurasawa.fr/"
@@ -22,6 +22,16 @@ export class Services {
         return axios({
             method: 'get',
             url: this.api + '/world',
+            headers: Services.setHeaders(this.user)
+        }).catch(Services.handleError)
+    }
+
+    putProduct(product : Product): AxiosPromise<Response> {
+        console.log("ON ACHETE")
+        return axios({
+            method: 'put',
+            url: this.api + '/product',
+            data: product,
             headers: Services.setHeaders(this.user)
         }).catch(Services.handleError)
     }

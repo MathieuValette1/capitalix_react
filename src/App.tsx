@@ -18,17 +18,45 @@ function App() {
     const [showUnlocks, setShowUnlocks] = useState(false)
     const [showUpgrades, setShowUpgrades] = useState(false)
     const [showAngels, setShowAngels] = useState(false)
+    const[money, setMoney] = useState(world.money)
+    const[score, setScore] = useState(world.score)
 
-    const username = ""
+    const [username, setUsername] = useState("")
+
+    function onUserNameChanged(){
+        // @ts-ignore
+        let input = document.getElementById("usernameInput")
+        // @ts-ignore
+        if (input.textContent != "") {
+            // @ts-ignore
+            let new_username = input.textContent
+            // @ts-ignore
+            input.value = new_username
+            // @ts-ignore
+            setUsername(new_username)
+
+        }
+    }
     useEffect(() => {
-
-        let services = new Services(username)
-        setServices(services)
-        services.getWorld().then(response => {
-                setWorld(response.data)
-            }
-        )
-
+        if (username !== "") {
+            let services = new Services(username)
+            setServices(services)
+            services.getWorld().then(response => {
+                    // let liste = compute_unlocks_list(response.data)
+                    setWorld(response.data)
+                    // setUnlockList(liste)
+                }
+            )
+        }
+    }, [username])
+    useEffect(() => {
+        let username = localStorage.getItem("username");
+        // si pas de username, on génère un username aléatoire
+        if (!username || username === "") {
+            username = "Captain" + Math.floor(Math.random() * 10000);
+        }
+        localStorage.setItem("username", username);
+        setUsername(username)
     }, [])
 
     function onProductionDone(p: Product): void {
@@ -38,15 +66,26 @@ function App() {
         console.log("Gain")
         console.log(gain)
         addToScore(gain)
+        updateMoney(gain)
+        services.putProduct(p)
+    }
+
+    function onProductBuy(cost:number, product:Product):void{
+        updateMoney(-cost)
+        /// On transmet toutes ces modifs au serveur
+        services.putProduct(product)
+    }
+
+    function updateMoney(gain:number){
+        /// Met à jour l'argent du joueur de manière positive (revenu gain positif) ou négative (achat gain négatif)
+        world.money += gain
+        setMoney(world.money)
     }
 
     function addToScore(gain: number): void {
-        console.log("Score ")
-        console.log(world.score)
-        console.log(world.money)
-        world.money += gain
-        console.log(world.money)
+        /// Met à jour le score du joueur
         world.score += gain
+        setScore(world.score)
     }
     
     function afficheManagers(): void{
@@ -108,7 +147,10 @@ function App() {
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span id="worldName"> {world.name} </span></div>
                 <span dangerouslySetInnerHTML={{__html: transform(world.money)}}/>
                 <div> <button id="commutateurButton" onClick={changeCommutator} type="button">x1</button></div>
-                <div> ID du joueur </div>
+                <div> Username <input type="text" id="usernameInput"
+                                      value={username}
+                                      onChange={onUserNameChanged}/></div>
+
                 <span dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
 
             </div>
@@ -123,16 +165,16 @@ function App() {
                     </ul></nav>
                 </div>
 
-                <div className="products">
-                    {world.products.product.map( p =>
-                        <ProductComponent prod={ p }
-                                        services={ services }
-                                        onProductionDone={onProductionDone}
-                                        qtmulti = {qtmulti}
-                                        worldMoney = {world.money}
-                        />
-                        )}
-                    </div>
+            <div className="products">
+                {world.products.product.map( p =>
+                    <ProductComponent prod={ p }
+                                      services={ services }
+                                      onProductionDone={onProductionDone}
+                                      onProductBuy={onProductBuy}
+                                      qtmulti = {qtmulti}
+                                      worldMoney = {world.money}
+                    />
+                    )}
                 </div>
                 <div className='modale'> { showManagers &&
                     <div className='managers'>
@@ -171,7 +213,8 @@ function App() {
                     </div>
                 } </div>
             </div>
-        
+        </div>
+
     );
 }
 

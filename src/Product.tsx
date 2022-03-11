@@ -7,13 +7,17 @@ import './Product.css'
 type ProductProps = {
     prod: Product
     onProductionDone: (product: Product) => void
+    onProductBuy: (cost: number, product:Product) => void
     services: Services
     qtmulti: number
     worldMoney: number
 }
-export default function ProductComponent({ prod, services, onProductionDone, worldMoney, qtmulti }: ProductProps) {
+export default function ProductComponent({ prod, services, onProductionDone, onProductBuy, worldMoney, qtmulti }: ProductProps) {
     const [progress, setProgress] = useState(0)
-
+    const [quantite, setQuantite] = useState(prod.quantite)
+    const [cost, setCost] = useState(prod.cout)
+    const [revenu, setRevenu] = useState(prod.revenu)
+    calcMaxCanBuy()
     const savedCallback = useRef(calcScore)
     useEffect(() => savedCallback.current = calcScore)
     useEffect(() => {
@@ -22,12 +26,6 @@ export default function ProductComponent({ prod, services, onProductionDone, wor
             if (timer) clearInterval(timer)
         }
     }, [])
-
-    /// Si le bouton commutateur est sur xMax, on calcule la qte max achetable
-    if (qtmulti != 1 && qtmulti != 10 && qtmulti != 100 ){
-        console.log("on t'appelle")
-        calcMaxCanBuy()
-    }
 
     function startFabrication(){
         if (prod.quantite>0) {
@@ -72,21 +70,57 @@ export default function ProductComponent({ prod, services, onProductionDone, wor
         /// Calcule le maximum de produit qui peut être acheté avec l'argent actuel
         let money = worldMoney
         let c = prod.croissance
+        if (qtmulti == 1){
+            qtmulti = 1
+        }
+        else if (qtmulti == 10){
+            qtmulti = 10
+        }
+        else if (qtmulti == 100){
+            qtmulti = 100
+        }
+        else {
+            let n = Math.floor(Math.log(1 - money * (1 - c) / prod.cout) / Math.log(c))
+            qtmulti = n
+        }
+    }
 
-        let n = Math.round(Math.log(1-money*(1-c)/prod.cout)/Math.log(c))
+    function costOfNProduct(n: number):number{
+        /// Calcule le cout de n produits
 
-        qtmulti = n
+        console.log(n)
+        return Math.floor(prod.cout * (1 - Math.pow(prod.croissance, n))/ (1 - prod.croissance))
+
+    }
+
+    function buyProduct():void{
+        /// Le joueur achète qte produits
+        // On ajoute la quantité achetée à la quantité totale de produit et on met à jour l'affichage
+        prod.quantite += qtmulti
+        setQuantite(prod.quantite)
+        /// On calcule le prix de l'achat et on l'envoie au composant parent
+        let cost = costOfNProduct(qtmulti)
+        // On calcule le nouveau prix et on met à jour l'affichage
+        prod.cout = prod.cout*Math.pow(prod.croissance, qtmulti)
+        setCost(Math.floor(prod.cout))
+        // On calcule le nouveau revenu du produit et on met à jour l'affichage
+        prod.revenu = prod.cout * prod.quantite
+        setRevenu(Math.floor(prod.revenu))
+        /// On transmet au parent
+        onProductBuy(cost, prod)
     }
 
     return (
         <div className="product">
             <div className="productInfo">
                 <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
-                <div className="qte">Quantité: {prod.quantite}</div>
+                <div className="qte">Quantité: {quantite}</div>
             </div>
-            <div className="revenu">Revenu: {prod.revenu}</div>
+            <div className="revenu">Revenu: {revenu}</div>
             <div className="prixStand">
-                <button type="button">x{qtmulti} Prix: {qtmulti * prod.cout} </button>
+                <button type="button" onClick={buyProduct} disabled={worldMoney < costOfNProduct(qtmulti) || qtmulti==0}>
+                    x{qtmulti} Prix: {costOfNProduct(qtmulti)}
+                </button>
             </div>
             <div className="temps">Temps: {prod.vitesse}s</div>
             <div className="progressBar">
