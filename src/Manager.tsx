@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Services } from "./service"
 import { Pallier, World } from "./world"
-import './Manager.css'
+import './Modale.css'
 
 type ManagerProps = {
     world : World 

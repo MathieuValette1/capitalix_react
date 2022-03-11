@@ -134,7 +134,7 @@ function App() {
                         )}
                     </div>
                 </div>
-                <div> { showManagers &&
+                <div className='modale'> { showManagers &&
                     <div className='managers'>
                         <Manager world={world}
                                 services={services}
@@ -143,7 +143,7 @@ function App() {
                                 />
                     </div>
                 } </div>
-                <div> { showUnlocks &&
+                <div className='modale'> { showUnlocks &&
                     <div className='unlocks'>
                         <Unlocks world={world}
                                 services={services}
@@ -152,7 +152,7 @@ function App() {
                                 />
                     </div>
                 } </div>
-                <div> { showUpgrades &&
+                <div className='modale'> { showUpgrades &&
                     <div className='upgrades'>
                         <Upgrades world={world}
                                 services={services}
@@ -161,7 +161,7 @@ function App() {
                                 />
                     </div>
                 } </div>
-                <div> { showAngels &&
+                <div className='modale'> { showAngels &&
                     <div className='angels'>
                         <Angels world={world}
                                 services={services}

@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Services } from "./service"
 import { Pallier, World } from "./world"
+import './Modale.css'
+
 
 type AngelProps = {
     world : World 
