@@ -11,6 +11,7 @@ function App() {
     const [services, setServices] = useState(new Services(""))
     const [world, setWorld] = useState(new World())
     const [qtmulti, setQtMulti] = useState(1)
+    const [showManagers, setShow] = useState(false)
 
     const username = ""
     useEffect(() => {
@@ -41,9 +42,10 @@ function App() {
         console.log(world.money)
         world.score += gain
     }
-
-    function afficheManager(){}
-        
+    
+    function afficheManagers(): void{
+        setShow(!showManagers);
+    }
 
     function changeCommutator():void{
         /// Fonction permettant de changer l'affichage du bouton commutateur dans cet ordre:
@@ -85,7 +87,7 @@ function App() {
                     <nav><ul>
                         <li>My World</li>
                         <li>Unlocks</li>
-                        <li onClick={afficheManager}>Managers</li>
+                        <li onClick={afficheManagers}>Managers</li>
                         <li>Upgrades</li>
                         <li>Angels</li>
                     </ul></nav>
@@ -101,9 +103,14 @@ function App() {
                     />
                     )}
                 </div>
-                <div className='managers'>
-                    <Manager world={world} services={services}/>
-                </div>
+                <div> { showManagers &&
+                    <div className='managers'>
+                        <Manager world={world}
+                                services={services}
+                                afficheManagers={afficheManagers}
+                                />
+                    </div>
+                } </div>
             </div>
         </div>
     );
