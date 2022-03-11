@@ -7,15 +7,12 @@ type ManagerProps = {
     world : World 
     services : Services
     afficheManagers(): void
+    hideManagers(): void
 }
 
-export default function Manager({world, services, afficheManagers}: ManagerProps){
+export default function Manager({world, services, afficheManagers, hideManagers}: ManagerProps){
 
     function hireManager(manager: Pallier){}
-
-    function hideManagers(){
-        
-    }
 
     return (
         <div className="modal">
@@ -40,7 +37,7 @@ export default function Manager({world, services, afficheManagers}: ManagerProps
                         </div>
                     </div>)
                 }
-                <button onClick={afficheManagers} className="closebutton" >Fermer</button>
+                <button onClick={hideManagers} className="closebutton" >Fermer</button>
 
             </div>
         </div>

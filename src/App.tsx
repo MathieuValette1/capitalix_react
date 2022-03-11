@@ -44,7 +44,11 @@ function App() {
     }
     
     function afficheManagers(): void{
-        setShow(!showManagers);
+        setShow(true);
+    }
+
+    function hideManagers(): void{
+        setShow(false);
     }
 
     function changeCommutator():void{
@@ -108,6 +112,7 @@ function App() {
                         <Manager world={world}
                                 services={services}
                                 afficheManagers={afficheManagers}
+                                hideManagers={hideManagers}
                                 />
                     </div>
                 } </div>
