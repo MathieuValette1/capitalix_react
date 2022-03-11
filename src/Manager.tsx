@@ -17,28 +17,29 @@ export default function Manager({world, services, afficheManagers, hideManagers}
     return (
         <div className="modal">
             <div>
-                <h1 className="title">Managers make you feel better !</h1>
+                <h1 className="title">Directrix</h1>
+                <h2 className="soustitre">Ne laisse pas le ciel te tomber sur la tête grâce aux directrix.<br></br>
+                    Embauche les et ils gèreront pour toi la mise en production des produits que tu possèdes !</h2>
             </div>
             <div>
                 {world.managers.pallier.filter( manager => !manager.unlocked).map(manager =>
                     <div key={manager.idcible} className="managergrid">
                         <div>
-                            <div className="logo">
-                                <img alt="manager logo" className="round" src= {services.server + manager.logo} />
+                            <div>
+                                <img alt="manager logo" className="logo" src= {services.server + manager.logo} />
                             </div>
                         </div>
                         <div className="infosmanager">
                             <div className="managername"> { manager.name} </div>
-                            <div className="managercible"> {world.products.product[manager.idcible-1].name } </div>
-                            <div className="managercost"> { manager.seuil} </div>
+                            <div className="managercible"> Gère la vente de {world.products.product[manager.idcible-1].name } </div>
+                            <div className="managercost"> Coût : { manager.seuil} </div>
                         </div>
                         <div onClick={() => hireManager(manager)}>
-                            <button disabled={world.money < manager.seuil}>Hire !</button>
+                            <button className="hiremanager" disabled={world.money < manager.seuil}>Hire !</button>
                         </div>
                     </div>)
                 }
                 <button onClick={hideManagers} className="closebutton" >Fermer</button>
-
             </div>
         </div>
     )

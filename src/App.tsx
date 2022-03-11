@@ -97,6 +97,7 @@ function App() {
 
     function afficheUnlocks(): void{
         setShowUnlocks(true);
+        hideManagers();
     }
     function hideUnlocks(): void{
         setShowUnlocks(false);
@@ -104,6 +105,7 @@ function App() {
 
     function afficheUpgrades(): void{
         setShowUpgrades(true);
+        hideManagers();
     }
     function hideUpgrades(): void{
         setShowUpgrades(false);
@@ -111,6 +113,7 @@ function App() {
 
     function afficheAngels(): void{
         setShowAngels(true);
+        hideManagers();
     }
     function hideAngels(): void{
         setShowAngels(false);
@@ -157,11 +160,10 @@ function App() {
             <div className="main">
                 <div>
                     <nav><ul>
-                        <li>My World</li>
-                        <li onClick={afficheUnlocks}>Unlocks</li>
-                        <li onClick={afficheManagers}>Managers</li>
-                        <li onClick={afficheUpgrades}>Upgrades</li>
-                        <li onClick={afficheAngels}>Angels</li>
+                        <li onClick={afficheUnlocks}>Echelonix</li>
+                        <li onClick={afficheManagers}>Directrix</li>
+                        <li onClick={afficheUpgrades}>Améliorationix</li>
+                        <li onClick={afficheAngels}>Sangliers</li>
                     </ul></nav>
                 </div>
 
