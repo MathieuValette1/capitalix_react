@@ -8,7 +8,7 @@ import {transform} from "./utils";
 import Manager from './Manager';
 import Unlocks from './Unlocks';
 import Upgrades from './Upgrades';
-import Angels from './Unlocks';
+import Angels from './Angels';
 
 function App() {
     const [services, setServices] = useState(new Services(""))
@@ -123,15 +123,16 @@ function App() {
                     </ul></nav>
                 </div>
 
-            <div className="products">
-                {world.products.product.map( p =>
-                    <ProductComponent prod={ p }
-                                      services={ services }
-                                      onProductionDone={onProductionDone}
-                                      qtmulti = {qtmulti}
-                                      worldMoney = {world.money}
-                    />
-                    )}
+                <div className="products">
+                    {world.products.product.map( p =>
+                        <ProductComponent prod={ p }
+                                        services={ services }
+                                        onProductionDone={onProductionDone}
+                                        qtmulti = {qtmulti}
+                                        worldMoney = {world.money}
+                        />
+                        )}
+                    </div>
                 </div>
                 <div> { showManagers &&
                     <div className='managers'>
@@ -160,7 +161,7 @@ function App() {
                                 />
                     </div>
                 } </div>
-                {/* <div> { showAngels &&
+                <div> { showAngels &&
                     <div className='angels'>
                         <Angels world={world}
                                 services={services}
@@ -168,9 +169,9 @@ function App() {
                                 hideAngels={hideAngels}
                                 />
                     </div>
-                } </div> */}
+                } </div>
             </div>
-        </div>
+        
     );
 }
 
