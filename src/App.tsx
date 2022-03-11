@@ -6,12 +6,18 @@ import ProductComponent from './Product';
 import { useState, useEffect} from 'react';
 import {transform} from "./utils";
 import Manager from './Manager';
+import Unlocks from './Unlocks';
+import Upgrades from './Upgrades';
+import Angels from './Unlocks';
 
 function App() {
     const [services, setServices] = useState(new Services(""))
     const [world, setWorld] = useState(new World())
     const [qtmulti, setQtMulti] = useState(1)
-    const [showManagers, setShow] = useState(false)
+    const [showManagers, setShowManagers] = useState(false)
+    const [showUnlocks, setShowUnlocks] = useState(false)
+    const [showUpgrades, setShowUpgrades] = useState(false)
+    const [showAngels, setShowAngels] = useState(false)
 
     const username = ""
     useEffect(() => {
@@ -44,11 +50,31 @@ function App() {
     }
     
     function afficheManagers(): void{
-        setShow(true);
+        setShowManagers(true);
+    }
+    function hideManagers(): void{
+        setShowManagers(false);
     }
 
-    function hideManagers(): void{
-        setShow(false);
+    function afficheUnlocks(): void{
+        setShowUnlocks(true);
+    }
+    function hideUnlocks(): void{
+        setShowUnlocks(false);
+    }
+
+    function afficheUpgrades(): void{
+        setShowUpgrades(true);
+    }
+    function hideUpgrades(): void{
+        setShowUpgrades(false);
+    }
+
+    function afficheAngels(): void{
+        setShowAngels(true);
+    }
+    function hideAngels(): void{
+        setShowAngels(false);
     }
 
     function changeCommutator():void{
@@ -90,10 +116,10 @@ function App() {
                 <div>
                     <nav><ul>
                         <li>My World</li>
-                        <li>Unlocks</li>
+                        <li onClick={afficheUnlocks}>Unlocks</li>
                         <li onClick={afficheManagers}>Managers</li>
-                        <li>Upgrades</li>
-                        <li>Angels</li>
+                        <li onClick={afficheUpgrades}>Upgrades</li>
+                        <li onClick={afficheAngels}>Angels</li>
                     </ul></nav>
                 </div>
 
@@ -116,6 +142,33 @@ function App() {
                                 />
                     </div>
                 } </div>
+                <div> { showUnlocks &&
+                    <div className='unlocks'>
+                        <Unlocks world={world}
+                                services={services}
+                                afficheUnlocks={afficheUnlocks}
+                                hideUnlocks={hideUnlocks}
+                                />
+                    </div>
+                } </div>
+                <div> { showUpgrades &&
+                    <div className='upgrades'>
+                        <Upgrades world={world}
+                                services={services}
+                                afficheUpgrades={afficheUpgrades}
+                                hideUpgrades={hideUpgrades}
+                                />
+                    </div>
+                } </div>
+                {/* <div> { showAngels &&
+                    <div className='angels'>
+                        <Angels world={world}
+                                services={services}
+                                afficheAngels={afficheAngels}
+                                hideAngels={hideAngels}
+                                />
+                    </div>
+                } </div> */}
             </div>
         </div>
     );
