@@ -88,7 +88,15 @@ function App() {
         setScore(world.score)
     }
     
+    function hideAllModal(): void {
+        hideManagers();
+        hideUnlocks();
+        hideUpgrades();
+        hideAngels();
+    }
+
     function afficheManagers(): void{
+        hideAllModal();
         setShowManagers(true);
     }
     function hideManagers(): void{
@@ -96,24 +104,24 @@ function App() {
     }
 
     function afficheUnlocks(): void{
+        hideAllModal();
         setShowUnlocks(true);
-        hideManagers();
     }
     function hideUnlocks(): void{
         setShowUnlocks(false);
     }
 
     function afficheUpgrades(): void{
+        hideAllModal();
         setShowUpgrades(true);
-        hideManagers();
     }
     function hideUpgrades(): void{
         setShowUpgrades(false);
     }
 
     function afficheAngels(): void{
+        hideAllModal();
         setShowAngels(true);
-        hideManagers();
     }
     function hideAngels(): void{
         setShowAngels(false);

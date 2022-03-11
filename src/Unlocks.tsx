@@ -34,7 +34,6 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
                 <div>{nextUnlock.at(0)?.name}</div>
                 <img alt="unlock logo" className="unlocklogo" src= {services.server + nextUnlock.at(0)?.logo} />
                 <div className="managercost"> { nextUnlock.at(0)?.seuil} </div>
-                {/* <div className="managercible"> {world.products.product[nextUnlock.at(0).idcible-1].name } </div> */}
             </div>
         )
     }
@@ -58,8 +57,8 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
                         <div className="infosmanager">
                             <div className="managername"> { unlock.name} </div>
                             <img alt="unlock logo" className="unlocklogo" src= {services.server + unlock.logo} />
-                            <div className="managercost"> { unlock.seuil} </div>
-                            <div className="managercible"> {world.products.product[unlock.idcible-1].name } </div>
+                            <div className="seuilulock"> { unlock.seuil} </div>
+                            <div className="produitcible"> {world.products.product[unlock.idcible-1].name } </div>
                         </div>
                     </div>)
                 }</div>
