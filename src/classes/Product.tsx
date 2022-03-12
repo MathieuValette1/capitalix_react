@@ -19,7 +19,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
     const [cost, setCost] = useState(prod.cout)
     calcMaxCanBuy()
     const savedCallback = useRef(calcScore)
-    useEffect(() => savedCallback.current = calcScore, [progress])
+    useEffect(() => savedCallback.current = calcScore)
     useEffect(() => {
         let timer = setInterval(() => savedCallback.current(), 100)
         return function cleanup() {
