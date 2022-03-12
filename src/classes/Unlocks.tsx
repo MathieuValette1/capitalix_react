@@ -32,9 +32,21 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
             <div key={nextUnlock.at(0)?.idcible} className="unlock">
                 <div>{nextUnlock.at(0)?.name}</div>
                 <img alt="unlock logo" className="unlocklogo" src= {services.server + nextUnlock.at(0)?.logo} />
-                <div className="managercost"> { nextUnlock.at(0)?.seuil} </div>
+                <div className="unlockcost"> { nextUnlock.at(0)?.seuil} </div>
             </div>
         )// retourne les infos relatives au premier des échelons pas encore débloqués du produit
+    }
+
+    function nextAllUnlock(){
+        const nextAllUnlock = world.allunlocks.pallier.filter(echelon => !echelon.unlocked);
+        // récupération de tous les allunlocks pas encore débloqués
+        return(
+            <div key={nextAllUnlock.at(0)?.idcible} className="unlock">
+                <div>{nextAllUnlock.at(0)?.name}</div>
+                <img alt="allunlock logo" className="unlocklogo" src= {services.server + nextAllUnlock.at(0)?.logo} />
+                <div className="allunlockcost"> { nextAllUnlock.at(0)?.seuil} </div>
+            </div>
+        )// retourne les infos relatives au premier des allunlocks pas encore débloqués
     }
 
     return (
@@ -48,19 +60,36 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
                 <button onClick={showGalerie} className="buttongalerie">Galerie</button>
             </div>
             <div id="nextunlocks"> {afficheNext &&
-                <div className="unlocksgrid">{world.products.product.map(produit => nextUnlock(produit))}</div>
+                <div className="unlocksgrid">
+                    {world.products.product.map(produit => nextUnlock(produit))}
+                    {nextAllUnlock()}
+                </div>
             }</div>
             <div id="galerie"> {afficheGalerie &&
-                <div className="unlocksgrid">{world.allunlocks.pallier.map(unlock =>
-                    <div key={unlock.idcible} className="unlock">
-                        <div className="infosmanager">
-                            <div className="managername"> { unlock.name} </div>
-                            <img alt="unlock logo" className="unlocklogo" src= {services.server + unlock.logo} />
-                            <div className="seuilulock"> { unlock.seuil} </div>
-                            <div className="produitcible"> {world.products.product[unlock.idcible-1].name } </div>
-                        </div>
-                    </div>)
-                }</div>
+                <div className="unlockgrid">
+                    <div>{world.products.product.map(produit =>
+                        produit.palliers.pallier.map(unlock =>
+                            <div key={unlock.idcible} className="unlock">
+                                <div className="unlockname">{unlock.name}</div>
+                                <img alt="unlock logo" className="unlocklogo" src= {services.server + unlock.logo} />
+                                <div className="seuilunlock"> { unlock.seuil} </div>
+                                <div className="produitcible"> {world.products.product[unlock.idcible-1].name } </div>
+                            </div>
+                        ))} 
+                        {/* affichage des unlocks de produits */}
+                        {world.allunlocks.pallier.map(unlock =>
+                            <div key={unlock.idcible} className="unlock">
+                                <div className="infosmanager">
+                                    <div className="managername"> { unlock.name} </div>
+                                    <img alt="unlock logo" className="unlocklogo" src= {services.server + unlock.logo} />
+                                    <div className="seuilunlock"> { unlock.seuil} </div>
+                                    <div className="produitcible"> all </div>
+                                </div>
+                            </div>)
+                        }
+                        {/* affichage des all unlocks */}
+                    </div>
+                </div>
             }</div>
             <button onClick={hideUnlocks} className="closebutton" >Fermer</button>
         </div>

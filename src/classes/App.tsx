@@ -9,6 +9,7 @@ import ManagerModal from './ManagerModal';
 import Unlocks from './Unlocks';
 import Upgrades from './Upgrades';
 import Angels from './Angels';
+import { forEachLeadingCommentRange } from 'typescript';
 
 function App() {
     const [services, setServices] = useState(new Services(""))
@@ -157,6 +158,46 @@ function App() {
         }
     }
 
+    function checkAllUnlocks(seuil: number){
+        let unlocked = true;
+        world.products.product.map(produit => 
+            produit.palliers.pallier.map(echelon => 
+                {
+                    if(echelon.seuil == seuil){
+                        if(!echelon.unlocked){
+                            unlocked = false;
+                        }
+                    }
+                }
+            )
+        )
+        if(unlocked){
+            let allunlock = world.allunlocks.pallier.find(allunlock => allunlock.seuil == seuil);
+            if(allunlock != null){
+                freeAllUnlock(allunlock);
+            }
+        }
+    }
+
+    function freeAllUnlock(allunlock: Pallier){
+        allunlock.unlocked = true;
+        world.products.product.map(prod =>
+            {    
+                if (allunlock.typeratio=="VITESSE"){
+                    
+                    prod.vitesse = prod.vitesse / allunlock.ratio
+                    prod.progressbarvalue = prod.progressbarvalue / allunlock.ratio
+                    prod.timeleft = prod.timeleft / 2
+                    //setProgress(prod.progressbarvalue)
+                    console.log("VITESSE de " + prod.name + " divisé par " + allunlock.ratio)
+                }
+                else if (allunlock.typeratio == "GAIN"){
+                    prod.revenu = prod.revenu * allunlock.ratio
+                    console.log("REVENU de " + prod.name + " multiplié par " + allunlock.ratio)
+                }
+            }
+        )
+    }
 
     return (
         <div className="App">
@@ -189,6 +230,7 @@ function App() {
                                       onProductBuy={onProductBuy}
                                       qtmulti = {qtmulti}
                                       worldMoney = {world.money}
+                                      checkAllUnlocks = {checkAllUnlocks}
                     />
                     )}
                 </div>

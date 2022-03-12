@@ -12,8 +12,9 @@ type ProductProps = {
     services: Services
     qtmulti: number
     worldMoney: number
+    checkAllUnlocks: (seuil : number) => void
 }
-export default function ProductComponent({ prod, services, onProductionDone, onProductBuy, worldMoney, qtmulti }: ProductProps) {
+export default function ProductComponent({ prod, services, onProductionDone, onProductBuy, worldMoney, qtmulti, checkAllUnlocks }: ProductProps) {
     const [progress, setProgress] = useState(((prod.vitesse - prod.timeleft) / prod.vitesse) * 100)
     const [quantite, setQuantite] = useState(prod.quantite)
     const [cost, setCost] = useState(prod.cout)
@@ -123,6 +124,8 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
                         prod.revenu = prod.revenu * unlock.ratio
                         console.log("REVENU de " + prod.name + " multiplié par " + unlock.ratio)
                     }
+
+                    checkAllUnlocks(unlock.seuil);
                 }
             }}
         )
