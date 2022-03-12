@@ -9,9 +9,10 @@ type ManagerModalProps = {
     services : Services
     afficheManagers(): void
     hideManagers(): void
+    onManagerBuy: (seuil:number, manager:Pallier) => void
 }
 
-export default function ManagerModal({world, services, afficheManagers, hideManagers}: ManagerModalProps){
+export default function ManagerModal({world, services, afficheManagers, hideManagers, onManagerBuy}: ManagerModalProps){
 
     return (
         <div className="modal">
@@ -25,6 +26,7 @@ export default function ManagerModal({world, services, afficheManagers, hideMana
                         <ManagerComponent manager= {manager}
                                           services={ services }
                                           world ={world}
+                                          onManagerBuy = {onManagerBuy}
                         />
                     )
                 }

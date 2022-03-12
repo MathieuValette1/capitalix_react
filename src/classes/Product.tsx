@@ -29,8 +29,8 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
 
     function startFabrication(){
         if (prod.quantite>0) {
-            console.log("Icone cliquée")
-            console.log(prod.name)
+            // console.log("Icone cliquée")
+            // console.log(prod.name)
             prod.timeleft = prod.vitesse
             prod.lastupdate = Date.now()
             services.putProduct(prod);
@@ -39,8 +39,12 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
 
     function calcScore(){
         if (prod.timeleft == 0){
+            // Le produit n'est pas en production
             //console.log(prod.name + " n'est pas en production")
             setProgress(0)
+            if (prod.managerUnlocked){
+                startFabrication()
+            }
         }
         else{
             let time_since_last_update = Date.now() - prod.lastupdate
@@ -56,6 +60,9 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
                 prod.progressbarvalue = 0
                 onProductionDone(prod)
                 calcMaxCanBuy()
+                if (prod.managerUnlocked){
+                    startFabrication()
+                }
             }
             else{
                 //console.log("Production pas finie")
@@ -88,8 +95,6 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
 
     function costOfNProduct(n: number):number{
         /// Calcule le cout de n produits
-
-        console.log(n)
         return prod.cout * (1 - Math.pow(prod.croissance, n))/ (1 - prod.croissance)
 
     }

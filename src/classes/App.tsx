@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import '../css/App.css';
 import { Services } from '../service';
-import { Product, World } from '../world';
+import {Pallier, Product, World } from '../world';
 import ProductComponent from './Product';
 import { useState, useEffect} from 'react';
 import {transform} from "../utils";
@@ -72,6 +72,12 @@ function App() {
         updateMoney(-cost)
         /// On transmet toutes ces modifs au serveur
         services.putProduct(product)
+    }
+
+    function  onManagerBuy(seuil:number, manager:Pallier):void{
+        console.log("Manager acheté")
+        updateMoney(-seuil)
+        //services.putManager(manager)
     }
 
     function updateMoney(gain:number){
@@ -185,9 +191,10 @@ function App() {
                 <div className='modale'> { showManagers &&
                     <div className='managers'>
                         <ManagerModal world={world}
-                                services={services}
-                                afficheManagers={afficheManagers}
-                                hideManagers={hideManagers}
+                                      services={services}
+                                      afficheManagers={afficheManagers}
+                                      hideManagers={hideManagers}
+                                      onManagerBuy={onManagerBuy}
                                 />
                     </div>
                 } </div>

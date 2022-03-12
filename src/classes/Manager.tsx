@@ -5,10 +5,22 @@ type ManagerProps = {
     manager: Pallier
     services: Services
     world: World
+    onManagerBuy: (seuil:number, manager:Pallier) => void
 }
-export default function ManagerComponent({manager, services, world}:ManagerProps){
+export default function ManagerComponent({manager, services, world, onManagerBuy}:ManagerProps){
 
-    function hireManager(){}
+    function hireManager(){
+        if (world.money>=manager.seuil){
+            // On transmet l'info à l'app
+            onManagerBuy(manager.seuil, manager)
+            // On désaffiche le manager
+            manager.unlocked = true
+            // On prévient le produit concerné
+            let product = world.products.product.find(produit => produit.id == manager.idcible)
+            // @ts-ignore
+            product.managerUnlocked = true
+        }
+    }
     return (
         <div key={manager.idcible} className="managergrid">
             <div>
