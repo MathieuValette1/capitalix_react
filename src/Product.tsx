@@ -34,6 +34,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
             console.log(prod.name)
             prod.timeleft = prod.vitesse
             prod.lastupdate = Date.now()
+            services.putProduct(prod);
         }
     }
 
@@ -109,7 +110,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         prod.cout = prod.cout*Math.pow(prod.croissance, qtmulti)
         setCost(Math.floor(prod.cout))
         // On calcule le nouveau revenu du produit et on met à jour l'affichage
-        prod.revenu = prod.cout * prod.quantite
+        prod.revenu = prod.revenu * prod.quantite
         setRevenu(Math.floor(prod.revenu))
         /// On transmet au parent
         onProductBuy(cost, prod)
