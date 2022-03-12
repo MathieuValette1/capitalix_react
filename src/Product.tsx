@@ -3,6 +3,7 @@ import { Services } from "./service"
 import { Product, World } from "./world"
 import ProgressBar from "./ProgressBar"
 import './Product.css'
+import { forEachLeadingCommentRange } from "typescript"
 
 type ProductProps = {
     prod: Product
@@ -99,6 +100,10 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         prod.quantite += qtmulti
         setQuantite(prod.quantite)
         /// On calcule le prix de l'achat et on l'envoie au composant parent
+        prod.palliers.pallier.filter(echelon => !echelon.unlocked).map(unlock =>
+            {if(unlock.seuil <= prod.quantite){unlock.unlocked = true;}}
+        )
+        // On vérifie si des unlocks ont été débloqués
         let cost = costOfNProduct(qtmulti)
         // On calcule le nouveau prix et on met à jour l'affichage
         prod.cout = prod.cout*Math.pow(prod.croissance, qtmulti)
