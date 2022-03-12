@@ -17,7 +17,6 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
     const [progress, setProgress] = useState(0)
     const [quantite, setQuantite] = useState(prod.quantite)
     const [cost, setCost] = useState(prod.cout)
-    const [revenu, setRevenu] = useState(prod.revenu)
     calcMaxCanBuy()
     const savedCallback = useRef(calcScore)
     useEffect(() => savedCallback.current = calcScore)
@@ -34,6 +33,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
             console.log(prod.name)
             prod.timeleft = prod.vitesse
             prod.lastupdate = Date.now()
+            services.putProduct(prod);
         }
     }
 
@@ -90,7 +90,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         /// Calcule le cout de n produits
 
         console.log(n)
-        return Math.floor(prod.cout * (1 - Math.pow(prod.croissance, n))/ (1 - prod.croissance))
+        return prod.cout * (1 - Math.pow(prod.croissance, n))/ (1 - prod.croissance)
 
     }
 
@@ -107,10 +107,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         let cost = costOfNProduct(qtmulti)
         // On calcule le nouveau prix et on met à jour l'affichage
         prod.cout = prod.cout*Math.pow(prod.croissance, qtmulti)
-        setCost(Math.floor(prod.cout))
-        // On calcule le nouveau revenu du produit et on met à jour l'affichage
-        prod.revenu = prod.cout * prod.quantite
-        setRevenu(Math.floor(prod.revenu))
+        setCost(prod.cout)
         /// On transmet au parent
         onProductBuy(cost, prod)
     }
@@ -121,7 +118,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
                 <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
                 <div className="qte">Quantité: {quantite}</div>
             </div>
-            <div className="revenu">Revenu: {revenu}</div>
+            <div className="revenu">Revenu: {prod.revenu * prod.quantite}</div>
             <div className="prixStand">
                 <button type="button" onClick={buyProduct} disabled={worldMoney < costOfNProduct(qtmulti) || qtmulti==0}>
                     x{qtmulti} Prix: {costOfNProduct(qtmulti)}

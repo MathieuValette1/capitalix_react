@@ -18,8 +18,6 @@ function App() {
     const [showUnlocks, setShowUnlocks] = useState(false)
     const [showUpgrades, setShowUpgrades] = useState(false)
     const [showAngels, setShowAngels] = useState(false)
-    const[money, setMoney] = useState(world.money)
-    const[score, setScore] = useState(world.score)
 
     const [username, setUsername] = useState("")
 
@@ -61,13 +59,13 @@ function App() {
 
     function onProductionDone(p: Product): void {
         // calcul de la somme obtenue par la production du produit
-        let gain = p.revenu
+        let gain = p.revenu * p.quantite
         // ajout de la somme à l’argent possédé
         console.log("Gain")
         console.log(gain)
         addToScore(gain)
         updateMoney(gain)
-        services.putProduct(p)
+        // services.putProduct(p)
     }
 
     function onProductBuy(cost:number, product:Product):void{
@@ -78,14 +76,12 @@ function App() {
 
     function updateMoney(gain:number){
         /// Met à jour l'argent du joueur de manière positive (revenu gain positif) ou négative (achat gain négatif)
-        world.money += gain
-        setMoney(world.money)
+        setWorld(world => ({...world, money:world.money + gain}))
     }
 
     function addToScore(gain: number): void {
         /// Met à jour le score du joueur
-        world.score += gain
-        setScore(world.score)
+        setWorld(world => ({...world, score:world.score + gain}))
     }
     
     function hideAllModal(): void {
@@ -228,4 +224,5 @@ function App() {
     );
 }
 
+// @ts-ignore
 export default App;
