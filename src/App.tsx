@@ -59,7 +59,7 @@ function App() {
 
     function onProductionDone(p: Product): void {
         // calcul de la somme obtenue par la production du produit
-        let gain = p.revenu
+        let gain = p.revenu * p.quantite
         // ajout de la somme à l’argent possédé
         console.log("Gain")
         console.log(gain)
