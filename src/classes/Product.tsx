@@ -1,8 +1,8 @@
 import {useEffect, useRef, useState } from "react"
-import { Services } from "./service"
-import { Product, World } from "./world"
+import { Services } from "../service"
+import { Product, World } from "../world"
 import ProgressBar from "./ProgressBar"
-import './Product.css'
+import '../css/Product.css'
 import { forEachLeadingCommentRange } from "typescript"
 
 type ProductProps = {

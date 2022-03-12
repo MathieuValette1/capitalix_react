@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { Services } from "./service"
-import { Pallier, Product, World } from "./world"
-import './Modale.css'
+import { Services } from "../service"
+import { Pallier, Product, World } from "../world"
+import '../css/Modale.css'
 
 
 type UnlocksProps = {

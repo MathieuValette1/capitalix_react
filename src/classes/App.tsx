@@ -1,10 +1,10 @@
 import logo from './logo.svg';
-import './App.css';
-import { Services } from './service';
-import { Product, World } from './world';
+import '../css/App.css';
+import { Services } from '../service';
+import { Product, World } from '../world';
 import ProductComponent from './Product';
 import { useState, useEffect} from 'react';
-import {transform} from "./utils";
+import {transform} from "../utils";
 import Manager from './Manager';
 import Unlocks from './Unlocks';
 import Upgrades from './Upgrades';
