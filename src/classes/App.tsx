@@ -5,7 +5,7 @@ import { Product, World } from '../world';
 import ProductComponent from './Product';
 import { useState, useEffect} from 'react';
 import {transform} from "../utils";
-import Manager from './Manager';
+import ManagerModal from './ManagerModal';
 import Unlocks from './Unlocks';
 import Upgrades from './Upgrades';
 import Angels from './Angels';
@@ -83,7 +83,7 @@ function App() {
         /// Met à jour le score du joueur
         setWorld(world => ({...world, score:world.score + gain}))
     }
-    
+
     function hideAllModal(): void {
         hideManagers();
         hideUnlocks();
@@ -184,7 +184,7 @@ function App() {
                 </div>
                 <div className='modale'> { showManagers &&
                     <div className='managers'>
-                        <Manager world={world}
+                        <ManagerModal world={world}
                                 services={services}
                                 afficheManagers={afficheManagers}
                                 hideManagers={hideManagers}
