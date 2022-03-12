@@ -103,11 +103,30 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         // On ajoute la quantité achetée à la quantité totale de produit et on met à jour l'affichage
         prod.quantite += qtmulti
         setQuantite(prod.quantite)
-        /// On calcule le prix de l'achat et on l'envoie au composant parent
-        prod.palliers.pallier.filter(echelon => !echelon.unlocked).map(unlock =>
-            {if(unlock.seuil <= prod.quantite){unlock.unlocked = true;}}
-        )
         // On vérifie si des unlocks ont été débloqués
+        prod.palliers.pallier.filter(echelon => !echelon.unlocked).map(unlock =>
+            {
+                if(unlock.seuil <= prod.quantite){
+                /// On vérifie que l'unlock n'a pas déjà été débloqué
+                if (!unlock.unlocked){
+                    console.log("On débloque " + unlock.name)
+                    console.log(unlock.typeratio)
+                    unlock.unlocked = true;
+                    if (unlock.typeratio=="VITESSE"){
+                        prod.vitesse = prod.vitesse / unlock.ratio
+                        prod.progressbarvalue = prod.progressbarvalue / unlock.ratio
+                        prod.timeleft = prod.timeleft / 2
+                        setProgress(prod.progressbarvalue)
+                        console.log("VITESSE de " + prod.name + " divisé par " + unlock.ratio)
+                    }
+                    else if (unlock.typeratio == "GAIN"){
+                        prod.revenu = prod.revenu * unlock.ratio
+                        console.log("REVENU de " + prod.name + " multiplié par " + unlock.ratio)
+                    }
+                }
+            }}
+        )
+        /// On calcule le prix de l'achat et on l'envoie au composant parent
         let cost = costOfNProduct(qtmulti)
         // On calcule le nouveau prix et on met à jour l'affichage
         prod.cout = prod.cout*Math.pow(prod.croissance, qtmulti)

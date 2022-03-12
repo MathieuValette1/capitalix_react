@@ -80,6 +80,10 @@ function App() {
         services.putManager(manager)
     }
 
+    function onUpgradeBuy(seuil:number, upgrade:Pallier):void{
+        console.log("click")
+    }
+
     function updateMoney(gain:number){
         /// Met à jour l'argent du joueur de manière positive (revenu gain positif) ou négative (achat gain négatif)
         setWorld(world => ({...world, money:world.money + gain}))
@@ -210,9 +214,10 @@ function App() {
                 <div className='modale'> { showUpgrades &&
                     <div className='upgrades'>
                         <Upgrades world={world}
-                                services={services}
-                                afficheUpgrades={afficheUpgrades}
-                                hideUpgrades={hideUpgrades}
+                                  services={services}
+                                  afficheUpgrades={afficheUpgrades}
+                                  hideUpgrades={hideUpgrades}
+                                  onUpgradeBuy = {onUpgradeBuy}
                                 />
                     </div>
                 } </div>

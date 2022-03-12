@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Services } from "../service"
 import { Pallier, World } from "../world"
 import '../css/Modale.css'
+import UpgradeComponent from "./Upgrade"
 
 
 type UpgradesProps = {
@@ -9,9 +10,10 @@ type UpgradesProps = {
     services : Services
     afficheUpgrades(): void
     hideUpgrades(): void
+    onUpgradeBuy: (seuil:number, upgrade:Pallier) => void
 }
 
-export default function Upgrades({world, services, afficheUpgrades, hideUpgrades}: UpgradesProps){
+export default function Upgrades({world, services, afficheUpgrades, hideUpgrades, onUpgradeBuy}: UpgradesProps){
 
     function buyUpgrade(upgrade: Pallier){}
 
@@ -23,19 +25,11 @@ export default function Upgrades({world, services, afficheUpgrades, hideUpgrades
             </div>
             <div>
                 {world.upgrades.pallier.filter(upgrade => !upgrade.unlocked).map(upgrade =>
-                    <div key={upgrade.idcible} className="upgradegrid">
-                        <div>
-                            <img alt="upgrade logo" className="logo" src={services.server + upgrade.logo} />
-                        </div>
-                        <div className="infosUpgrade">
-                            <div className="upgradename"> { upgrade.name} </div>
-                            <div className="produitcible"> Améliore les revenus du produit : {world.products.product.find(produit => produit.id == upgrade.idcible)?.name}</div>
-                            <div className="upgradecost"> Coût : { upgrade.seuil} </div>
-                        </div>
-                        <div onClick={() => buyUpgrade(upgrade)}>
-                            <button className="buybutton" disabled={world.money < upgrade.seuil}>Acheter !</button>
-                        </div>
-                    </div>
+                    <UpgradeComponent upgrade= {upgrade}
+                                      services={ services }
+                                      world ={world}
+                                      onUpgradeBuy = {onUpgradeBuy}
+                    />
                 )}
                 <button onClick={hideUpgrades} className="closebutton" >Fermer</button>
             </div>
