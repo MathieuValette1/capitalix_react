@@ -14,12 +14,12 @@ type ProductProps = {
     worldMoney: number
 }
 export default function ProductComponent({ prod, services, onProductionDone, onProductBuy, worldMoney, qtmulti }: ProductProps) {
-    const [progress, setProgress] = useState(0)
+    const [progress, setProgress] = useState(((prod.vitesse - prod.timeleft) / prod.vitesse) * 100)
     const [quantite, setQuantite] = useState(prod.quantite)
     const [cost, setCost] = useState(prod.cout)
     calcMaxCanBuy()
     const savedCallback = useRef(calcScore)
-    useEffect(() => savedCallback.current = calcScore)
+    useEffect(() => savedCallback.current = calcScore, [progress])
     useEffect(() => {
         let timer = setInterval(() => savedCallback.current(), 100)
         return function cleanup() {
@@ -33,7 +33,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
             // console.log(prod.name)
             prod.timeleft = prod.vitesse
             prod.lastupdate = Date.now()
-            services.putProduct(prod);
+
         }
     }
 
@@ -54,7 +54,6 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
 
             if(prod.timeleft<=0){
                 prod.timeleft = 0
-                console.log(prod.name + " a été créé")
                 let revenu = prod.revenu
                 // Remettre la barre de progression à 0
                 prod.progressbarvalue = 0

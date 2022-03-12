@@ -61,11 +61,11 @@ function App() {
         // calcul de la somme obtenue par la production du produit
         let gain = p.revenu * p.quantite
         // ajout de la somme à l’argent possédé
-        console.log("Gain")
-        console.log(gain)
+        // console.log("Gain")
+        // console.log(gain)
         addToScore(gain)
         updateMoney(gain)
-        // services.putProduct(p)
+        services.putProduct(p)
     }
 
     function onProductBuy(cost:number, product:Product):void{
@@ -77,7 +77,7 @@ function App() {
     function  onManagerBuy(seuil:number, manager:Pallier):void{
         console.log("Manager acheté")
         updateMoney(-seuil)
-        //services.putManager(manager)
+        services.putManager(manager)
     }
 
     function updateMoney(gain:number){

@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosPromise } from "axios";
-import {Product, World } from "./world";
+import {Pallier, Product, World } from "./world";
 
 export class Services {
     //server = "https://isiscapitalist.kk.kurasawa.fr/"
@@ -27,11 +27,20 @@ export class Services {
     }
 
     putProduct(product : Product): AxiosPromise<Response> {
-        console.log("ON ACHETE")
         return axios({
             method: 'put',
             url: this.api + '/product',
             data: product,
+            headers: Services.setHeaders(this.user)
+        }).catch(Services.handleError)
+    }
+
+    putManager(manager : Pallier): AxiosPromise<Response> {
+        console.log("ON RECRUTE")
+        return axios({
+            method: 'put',
+            url: this.api + '/manager',
+            data: manager,
             headers: Services.setHeaders(this.user)
         }).catch(Services.handleError)
     }
