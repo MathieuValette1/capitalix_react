@@ -19,23 +19,22 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
     function showGalerie(): void{
         setShowGalerie(true);
         setShowNext(false);
-    }
+    }// affichage de la div de galerie si bouton galerie cliqué
     function showNext(): void{
         setShowNext(true);
         setShowGalerie(false);
-    }
+    }// affichage de la div des prochains unlocks à atteindre
 
     function nextUnlock(produit: Product){
-        const qte=produit.quantite;
         const nextUnlock = produit.palliers.pallier.filter(echelon => !echelon.unlocked);
-        
+        // récupération de tous les échelons pas encore débloqués pour un produit donné
         return(
             <div key={nextUnlock.at(0)?.idcible} className="unlock">
                 <div>{nextUnlock.at(0)?.name}</div>
                 <img alt="unlock logo" className="unlocklogo" src= {services.server + nextUnlock.at(0)?.logo} />
                 <div className="managercost"> { nextUnlock.at(0)?.seuil} </div>
             </div>
-        )
+        )// retourne les infos relatives au premier des échelons pas encore débloqués du produit
     }
 
     return (
