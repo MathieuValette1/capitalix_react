@@ -31,11 +31,11 @@ export default function Manager({world, services, afficheManagers, hideManagers}
                         </div>
                         <div className="infosmanager">
                             <div className="managername"> { manager.name} </div>
-                            <div className="managercible"> Gère la vente de {world.products.product[manager.idcible-1].name } </div>
+                            <div className="managercible"> Gère la vente de {world.products.product.find(produit => produit.id == manager.idcible)?.name } </div>
                             <div className="managercost"> Coût : { manager.seuil} </div>
                         </div>
                         <div onClick={() => hireManager(manager)}>
-                            <button className="hiremanager" disabled={world.money < manager.seuil}>Hire !</button>
+                            <button className="buybutton" disabled={world.money < manager.seuil}>Enroler !</button>
                         </div>
                     </div>)
                 }
