@@ -13,8 +13,6 @@ type ManagerModalProps = {
 
 export default function ManagerModal({world, services, afficheManagers, hideManagers}: ManagerModalProps){
 
-    function hireManager(manager: Pallier){}
-
     return (
         <div className="modal">
             <div>
