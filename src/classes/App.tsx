@@ -82,7 +82,9 @@ function App() {
     }
 
     function onUpgradeBuy(seuil:number, upgrade:Pallier):void{
-        console.log("click")
+        console.log("Upgrade acheté")
+        updateMoney(-seuil)
+        services.putUpgrade(upgrade)
     }
 
     function updateMoney(gain:number){
@@ -225,6 +227,7 @@ function App() {
             <div className="products">
                 {world.products.product.map( p =>
                     <ProductComponent prod={ p }
+                                      world = {world}
                                       services={ services }
                                       onProductionDone={onProductionDone}
                                       onProductBuy={onProductBuy}

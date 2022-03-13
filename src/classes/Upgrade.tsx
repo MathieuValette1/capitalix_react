@@ -8,7 +8,15 @@ type UpgradeProps = {
     onUpgradeBuy: (seuil:number, upgrade:Pallier) => void
 }
 export default function UpgradeComponent({upgrade, services, world, onUpgradeBuy}:UpgradeProps){
-    function buyUpgrade(){}
+    function buyUpgrade(){
+        if (world.money>=upgrade.seuil && !upgrade.unlocked){
+            // On transmet l'info à l'app
+            onUpgradeBuy(upgrade.seuil, upgrade)
+            // On désaffiche le upgrade
+            upgrade.unlocked = true
+        }
+    }
+
     return (
         <div key={upgrade.idcible} className="upgradegrid">
             <div>
@@ -16,7 +24,7 @@ export default function UpgradeComponent({upgrade, services, world, onUpgradeBuy
             </div>
             <div className="infosUpgrade">
                 <div className="upgradename"> { upgrade.name} </div>
-                <div className="produitcible"> Améliore les revenus du produit : {world.products.product.find(produit => produit.id == upgrade.idcible)?.name}</div>
+                <div className="produitcible"> Améliore {upgrade.typeratio} du produit : {world.products.product.find(produit => produit.id == upgrade.idcible)?.name}</div>
                 <div className="upgradecost"> Coût : { upgrade.seuil} </div>
             </div>
             <div onClick={buyUpgrade}>

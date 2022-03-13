@@ -44,4 +44,14 @@ export class Services {
             headers: Services.setHeaders(this.user)
         }).catch(Services.handleError)
     }
+
+    putUpgrade(upgrade : Pallier): AxiosPromise<Response> {
+        console.log("ON AMELIORE")
+        return axios({
+            method: 'put',
+            url: this.api + '/upgrade',
+            data: upgrade,
+            headers: Services.setHeaders(this.user)
+        }).catch(Services.handleError)
+    }
 }
