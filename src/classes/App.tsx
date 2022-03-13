@@ -55,7 +55,7 @@ function App() {
 
     function onProductionDone(p: Product): void {
         // calcul de la somme obtenue par la production du produit
-        let gain = p.revenu * p.quantite
+        let gain = p.revenu * p.quantite * (1+world.activeangels*world.angelbonus/100)
         // ajout de la somme à l’argent possédé
         // console.log("Gain")
         // console.log(gain)

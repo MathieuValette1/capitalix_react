@@ -30,13 +30,14 @@ export default function ProductComponent({ prod, world, services, onProductionDo
     }, [])
 
     function startFabrication(){
-        if (prod.quantite>0) {
-            // console.log("Icone cliquée")
-            // console.log(prod.name)
-            prod.timeleft = prod.vitesse
-            prod.lastupdate = Date.now()
+        if (prod.timeleft == 0){
+            if (prod.quantite>0) {
+                // console.log("Icone cliquée")
+                // console.log(prod.name)
+                prod.timeleft = prod.vitesse
+                prod.lastupdate = Date.now()
 
-        }
+            }}
     }
 
     function checkForNewUpgrade(){
