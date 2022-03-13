@@ -30,7 +30,7 @@ export default function ProductComponent({ prod, world, services, onProductionDo
     }, [])
 
     function startFabrication(){
-        if (prod.timeleft == 0){
+        if (prod.timeleft == 0 ||prod.managerUnlocked){
             if (prod.quantite>0) {
                 // console.log("Icone cliquée")
                 // console.log(prod.name)
@@ -114,6 +114,14 @@ export default function ProductComponent({ prod, world, services, onProductionDo
                 // Faire progresser la ProgressBar
                 prod.progressbarvalue = ((prod.vitesse - prod.timeleft) / prod.vitesse) * 100
                 //console.log("Barre de progression: "+ progress + "%")
+                if (prod.vitesse <= 250){
+                    if (prod.progressbarvalue<=50){
+                        prod.progressbarvalue = 50
+                    }
+                    else {
+                        prod.progressbarvalue = 100
+                    }
+                }
             }
             setProgress(prod.progressbarvalue)
         }
