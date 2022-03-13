@@ -7,6 +7,7 @@ import { forEachLeadingCommentRange } from "typescript"
 
 type ProductProps = {
     prod: Product
+    world: World
     onProductionDone: (product: Product) => void
     onProductBuy: (cost: number, product:Product) => void
     services: Services
@@ -14,7 +15,7 @@ type ProductProps = {
     worldMoney: number
     checkAllUnlocks: (seuil : number) => void
 }
-export default function ProductComponent({ prod, services, onProductionDone, onProductBuy, worldMoney, qtmulti, checkAllUnlocks }: ProductProps) {
+export default function ProductComponent({ prod, world, services, onProductionDone, onProductBuy, worldMoney, qtmulti, checkAllUnlocks }: ProductProps) {
     const [progress, setProgress] = useState(((prod.vitesse - prod.timeleft) / prod.vitesse) * 100)
     const [quantite, setQuantite] = useState(prod.quantite)
     const [cost, setCost] = useState(prod.cout)
@@ -38,7 +39,33 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
         }
     }
 
+    function checkForNewUpgrade(){
+        world.upgrades.pallier.map(upgrade =>{
+            if (upgrade.idcible == prod.id){
+                if (upgrade.unlocked && !upgrade.computed){
+                    /// L'upgrade a été débloqué mais pas appliqué
+                    if (upgrade.typeratio == "VITESSE"){
+                        prod.vitesse = prod.vitesse / upgrade.ratio
+                        prod.progressbarvalue = prod.progressbarvalue / upgrade.ratio
+                        prod.timeleft = prod.timeleft / 2
+                        setProgress(prod.progressbarvalue)
+                        console.log("VITESSE de " + prod.name + " divisé par " + upgrade.ratio)
+                        upgrade.computed = true
+                        upgrade.unlocked = true
+                    }
+                    else if (upgrade.typeratio == "GAIN"){
+                        prod.revenu = prod.revenu * upgrade.ratio
+                        console.log("REVENU de " + prod.name + " multiplié par " + upgrade.ratio)
+                        upgrade.computed = true
+                    }
+
+                }
+            }
+        })
+    }
+
     function calcScore(){
+        checkForNewUpgrade()
         if (prod.timeleft == 0){
             // Le produit n'est pas en production
             //console.log(prod.name + " n'est pas en production")
@@ -139,7 +166,7 @@ export default function ProductComponent({ prod, services, onProductionDone, onP
     }
 
     return (
-        <div className="product">
+        <div className="product" key={prod.id}>
             <div className="productInfo">
                 <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
                 <div className="qte">Quantité: {quantite}</div>

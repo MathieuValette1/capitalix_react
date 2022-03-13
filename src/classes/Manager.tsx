@@ -18,6 +18,8 @@ export default function ManagerComponent({manager, services, world, onManagerBuy
             // On prévient le produit concerné
             let product = world.products.product.find(produit => produit.id == manager.idcible)
             // @ts-ignore
+            console.log(product.name)
+            // @ts-ignore
             product.managerUnlocked = true
         }
     }

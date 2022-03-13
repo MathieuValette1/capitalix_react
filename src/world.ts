@@ -51,4 +51,5 @@ export class Pallier {
     ratio: number = 0
     typeratio: string = ""
     unlocked: boolean = false
+    computed:boolean = false
 }
