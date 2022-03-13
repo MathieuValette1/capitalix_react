@@ -42,22 +42,39 @@ export default function ProductComponent({ prod, world, services, onProductionDo
     function checkForNewUpgrade(){
         world.upgrades.pallier.map(upgrade =>{
             if (upgrade.idcible == prod.id){
-                if (upgrade.unlocked && !upgrade.computed){
-                    /// L'upgrade a été débloqué mais pas appliqué
+                if (upgrade.unlocked){
+                    /// L'upgrade a été débloqué on l'applique dans tous les cas (ratio = 1 si déjà appliqué)
                     if (upgrade.typeratio == "VITESSE"){
                         prod.vitesse = prod.vitesse / upgrade.ratio
                         prod.progressbarvalue = prod.progressbarvalue / upgrade.ratio
-                        prod.timeleft = prod.timeleft / 2
+                        prod.timeleft = prod.timeleft / upgrade.ratio
                         setProgress(prod.progressbarvalue)
-                        console.log("VITESSE de " + prod.name + " divisé par " + upgrade.ratio)
-                        upgrade.computed = true
-                        upgrade.unlocked = true
+                        // console.log("VITESSE de " + prod.name + " divisé par " + upgrade.ratio)
+                        upgrade.ratio = 1
                     }
                     else if (upgrade.typeratio == "GAIN"){
                         prod.revenu = prod.revenu * upgrade.ratio
                         console.log("REVENU de " + prod.name + " multiplié par " + upgrade.ratio)
-                        upgrade.computed = true
+                        upgrade.ratio = 1
                     }
+                }
+            }
+            else if(upgrade.idcible ==0){
+                if (upgrade.unlocked){
+                /// C'est un upgrade s'appliquant sur tous les produits
+                world.products.product.map(p => {
+                    if (upgrade.typeratio == "VITESSE") {
+                        p.vitesse = p.vitesse / upgrade.ratio
+                        p.progressbarvalue = p.progressbarvalue / upgrade.ratio
+                        p.timeleft = p.timeleft / upgrade.ratio
+                        setProgress(p.progressbarvalue)
+                        // console.log("VITESSE de " + prod.name + " divisé par " + upgrade.ratio)
+                    } else if (upgrade.typeratio == "GAIN") {
+                        p.revenu = p.revenu * upgrade.ratio
+                        console.log("REVENU de " + prod.name + " multiplié par " + upgrade.ratio)
+                    }
+                })
+                    upgrade.ratio = 1
 
                 }
             }
