@@ -203,13 +203,17 @@ function App() {
         <div className="App">
             <div className="header">
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span id="worldName"> {world.name} </span></div>
-                <span dangerouslySetInnerHTML={{__html: transform(world.money)}}/>
+                <div>
+                    <span dangerouslySetInnerHTML={{__html: transform(world.money)}}></span>
+                    <img className='logomonnaie' alt='logo monnaie' src={'..\\images\\monnaie.png'}></img>
+                </div>
                 <div> <button id="commutateurButton" onClick={changeCommutator} type="button">x1</button></div>
                 <div> Username <input type="text" id="usernameInput"
                                       value={username}
                                       onChange={onUserNameChanged}/></div>
 
                 <span dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
+                <button id="deletebutton" type="button">Delete world</button>
 
             </div>
             <div className="main">
