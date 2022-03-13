@@ -25,16 +25,10 @@ function App() {
 
     function onUserNameChanged(){
         // @ts-ignore
-        let input = document.getElementById("usernameInput")
-        // @ts-ignore
-        if (input.textContent != "") {
-            // @ts-ignore
-            let new_username = input.textContent
-            // @ts-ignore
-            input.value = new_username
-            // @ts-ignore
-            setUsername(new_username)
-
+        let username = document.getElementById("usernameInput").value
+        if (username!=""){
+            localStorage.setItem("username", username);
+            setUsername(username)
         }
     }
     useEffect(() => {
@@ -86,6 +80,12 @@ function App() {
         console.log("Upgrade acheté")
         updateMoney(-seuil)
         services.putUpgrade(upgrade)
+    }
+
+    function onWorldReset():void{
+        services.deleteWorld()
+        // window.location.reload() // Je l'ai commenté parce que le reload se fait avant le delete, et le monde ne se reset pas
+        setTimeout(() => window.location.reload(), 500)
     }
 
     function updateMoney(gain:number){
@@ -216,7 +216,7 @@ function App() {
                                       onChange={onUserNameChanged}/></div>
 
                 <span dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
-                <button id="deletebutton" type="button">Delete world</button>
+
 
             </div>
             <div className="main">
@@ -277,6 +277,7 @@ function App() {
                                 services={services}
                                 afficheAngels={afficheAngels}
                                 hideAngels={hideAngels}
+                                onWorldReset={onWorldReset}
                                 />
                     </div>
                 } </div>

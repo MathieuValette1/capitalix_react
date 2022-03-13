@@ -118,6 +118,8 @@ export default function ProductComponent({ prod, world, services, onProductionDo
         }
     }
 
+
+
     function calcMaxCanBuy(): void{
         /// Calcule le maximum de produit qui peut être acheté avec l'argent actuel
         let money = worldMoney
