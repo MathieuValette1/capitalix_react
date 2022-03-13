@@ -208,7 +208,7 @@ function App() {
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span id="worldName"> {world.name} </span></div>
                 <div>
                     <img className='logomonnaie' alt='logo monnaie' src={logoMonnaie}></img>
-                    <span dangerouslySetInnerHTML={{__html: transform(world.money)}}></span>
+                    <span>{transform(world.money)}</span>
                 </div>
                 <div> <button id="commutateurButton" onClick={changeCommutator} type="button">x1</button></div>
                 <div> Username <input type="text" id="usernameInput"

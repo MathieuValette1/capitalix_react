@@ -4,6 +4,7 @@ import { Product, World } from "../world"
 import ProgressBar from "./ProgressBar"
 import '../css/Product.css'
 import { forEachLeadingCommentRange } from "typescript"
+import { transform } from "../utils"
 
 type ProductProps = {
     prod: Product
@@ -199,13 +200,13 @@ export default function ProductComponent({ prod, world, services, onProductionDo
                 <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
                 <div className="qte">Quantité: {quantite}</div>
             </div>
-            <div className="revenu">Revenu: {prod.revenu * prod.quantite}</div>
+            <div className="revenu">Revenu: {transform(prod.revenu * prod.quantite)}</div>
             <div className="prixStand">
                 <button type="button" onClick={buyProduct} disabled={worldMoney < costOfNProduct(qtmulti) || qtmulti==0}>
-                    x{qtmulti} Prix: {costOfNProduct(qtmulti)}
+                    x{qtmulti} Prix: {transform(costOfNProduct(qtmulti))}
                 </button>
             </div>
-            <div className="temps">Temps: {prod.vitesse}s</div>
+            <div className="temps">Temps: {prod.vitesse}ms</div>
             <div className="progressBar">
                 <ProgressBar transitionDuration={"0.1s"} customLabel={" "} completed={progress}/>
             </div>
