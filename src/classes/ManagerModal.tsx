@@ -16,21 +16,21 @@ export default function ManagerModal({world, services, afficheManagers, hideMana
 
     return (
         <div className="modal">
+            <button onClick={hideManagers} className="closebutton" >&#x2718;</button>
             <div>
                 <h1 className="title">Directrix</h1>
                 <h2 className="soustitre">Ne laisse pas le ciel te tomber sur la tête grâce aux directrix.<br></br>
                     Embauche les et ils gèreront pour toi la mise en production des produits que tu possèdes !</h2>
             </div>
-            <div>
+            <div className="sousmodale">
                 {world.managers.pallier.filter( manager => !manager.unlocked).map(manager =>
                         <ManagerComponent manager= {manager}
-                                          services={ services }
-                                          world ={world}
-                                          onManagerBuy = {onManagerBuy}
+                                        services={ services }
+                                        world ={world}
+                                        onManagerBuy = {onManagerBuy}
                         />
                     )
                 }
-                <button onClick={hideManagers} className="closebutton" >Fermer</button>
             </div>
         </div>
     )

@@ -1,13 +1,49 @@
+/* .surmodale {
+    position: absolute;
+    margin: auto;
+    margin: auto;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+    width:1000px;
+    height: 600px;
+} */
 .modal {
-    position: fixed; /* reste en place */
     z-index: 2; /* au dessus du reste */
+    position: absolute;
+     margin: auto;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+    
+
     width: 1000px; /* largeur */
     height: 600px; /* hauteur */
     overflow: auto; /* barre de scroll si besoin */
     background-color: white; /* opaque */
     border: solid;
-    top:10%; /* a 10% du haut */
-    left:20%; /* a 20% de la gauche */
+    /* padding-top:10%; a 10% du haut */
+    /* padding-left:20%; a 20% de la gauche */
+}
+
+.sousmodale {
+    position: absolute;
+    margin: auto;
+    width: 950px;
+    height: 400px;
+    overflow: auto;
+}
+
+.closebutton{
+    position: absolute;
+    right: 45px;
+    top: 10px;
+    border-radius: 50%;
+    padding:1em 1.2em;
+    font-weight: bold;
+    font-size: large;
 }
 
 .soustitre {

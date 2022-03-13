@@ -20,7 +20,7 @@ export default function Upgrades({world, services, afficheUpgrades, hideUpgrades
             <div>
                 <h1 className="title">Modale des upgrades</h1>
             </div>
-            <div>
+            <div className="sousmodale">
                 {world.upgrades.pallier.filter(upgrade => !upgrade.unlocked).map(upgrade =>
                     <UpgradeComponent upgrade= {upgrade}
                                       services={ services }
@@ -28,8 +28,9 @@ export default function Upgrades({world, services, afficheUpgrades, hideUpgrades
                                       onUpgradeBuy = {onUpgradeBuy}
                     />
                 )}
-                <button onClick={hideUpgrades} className="closebutton" >Fermer</button>
+                
             </div>
+            <button onClick={hideUpgrades} className="closebutton" >&#x2718;</button>
         </div>
     )
 }

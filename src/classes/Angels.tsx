@@ -15,6 +15,7 @@ export default function Angels({world, services, afficheAngels, hideAngels}: Ang
 
     return (
         <div className="modal">
+            <button onClick={hideAngels} className="closebutton" >&#x2718;</button>
             <div>
                 <h1 className="title">Modale des anges</h1>
             </div>
