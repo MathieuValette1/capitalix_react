@@ -42,23 +42,22 @@ export default function ProductComponent({ prod, world, services, onProductionDo
     function checkForNewUpgrade(){
         world.upgrades.pallier.map(upgrade =>{
             if (upgrade.idcible == prod.id){
-                if (upgrade.unlocked && !upgrade.computed){
+                console.log("Computed "+ upgrade.computed)
+                if (upgrade.unlocked){
                     /// L'upgrade a été débloqué mais pas appliqué
                     if (upgrade.typeratio == "VITESSE"){
                         prod.vitesse = prod.vitesse / upgrade.ratio
                         prod.progressbarvalue = prod.progressbarvalue / upgrade.ratio
-                        prod.timeleft = prod.timeleft / 2
+                        prod.timeleft = prod.timeleft / upgrade.ratio
                         setProgress(prod.progressbarvalue)
                         console.log("VITESSE de " + prod.name + " divisé par " + upgrade.ratio)
-                        upgrade.computed = true
-                        upgrade.unlocked = true
+                        upgrade.ratio = 1
                     }
                     else if (upgrade.typeratio == "GAIN"){
                         prod.revenu = prod.revenu * upgrade.ratio
                         console.log("REVENU de " + prod.name + " multiplié par " + upgrade.ratio)
-                        upgrade.computed = true
+                        upgrade.ratio = 1
                     }
-
                 }
             }
         })
