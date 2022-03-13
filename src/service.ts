@@ -15,7 +15,8 @@ export class Services {
     }
     private static setHeaders(user : string) {
         return {
-            "X-User": user
+            "X-User": user,
+            "Access-Control-Allow-Origin":"*"
         }
     }
     getWorld(): AxiosPromise<World> {
@@ -27,6 +28,7 @@ export class Services {
     }
 
     putProduct(product : Product): AxiosPromise<Response> {
+        // console.log("PUT")
         return axios({
             method: 'put',
             url: this.api + '/product',
@@ -54,4 +56,14 @@ export class Services {
             headers: Services.setHeaders(this.user)
         }).catch(Services.handleError)
     }
+
+    deleteWorld(): AxiosPromise<Response> {
+        console.log('ON RESET')
+        return axios({
+            method: 'delete',
+            url: this.api + '/world',
+            headers: Services.setHeaders(this.user)
+        }).catch(Services.handleError)
+    }
+
 }

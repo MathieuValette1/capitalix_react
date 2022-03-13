@@ -4,7 +4,7 @@ import { Product, World } from "../world"
 import ProgressBar from "./ProgressBar"
 import '../css/Product.css'
 import { forEachLeadingCommentRange } from "typescript"
-import { time } from "console"
+import { transform } from "../utils"
 
 type ProductProps = {
     prod: Product
@@ -32,13 +32,14 @@ export default function ProductComponent({ prod, world, services, onProductionDo
     }, [])
 
     function startFabrication(){
-        if (prod.quantite>0) {
-            setInFabric(true)
-            // console.log("Icone cliquée")
-            // console.log(prod.name)
-            prod.timeleft = prod.vitesse
-            prod.lastupdate = Date.now()
-        }
+        if (prod.timeleft == 0 ||prod.managerUnlocked){
+            if (prod.quantite>0) {
+                // console.log("Icone cliquée")
+                // console.log(prod.name)
+                prod.timeleft = prod.vitesse
+                prod.lastupdate = Date.now()
+
+            }}
     }
 
     function checkForNewUpgrade(){
@@ -115,10 +116,20 @@ export default function ProductComponent({ prod, world, services, onProductionDo
                 // Faire progresser la ProgressBar
                 prod.progressbarvalue = ((prod.vitesse - prod.timeleft) / prod.vitesse) * 100
                 //console.log("Barre de progression: "+ progress + "%")
+                if (prod.vitesse <= 250){
+                    if (prod.progressbarvalue<=50){
+                        prod.progressbarvalue = 50
+                    }
+                    else {
+                        prod.progressbarvalue = 100
+                    }
+                }
             }
             setProgress(prod.progressbarvalue)
         }
     }
+
+
 
     function calcMaxCanBuy(): void{
         /// Calcule le maximum de produit qui peut être acheté avec l'argent actuel
@@ -191,10 +202,10 @@ export default function ProductComponent({ prod, world, services, onProductionDo
                 <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
                 <div className="qte">Stock : {quantite}</div>
             </div>
-            <div className="revenu">Revenu: {prod.revenu * prod.quantite}</div>
+            <div className="revenu">Revenu: {transform(prod.revenu * prod.quantite)}</div>
             <div className="prixStand">
                 <button type="button" onClick={buyProduct} disabled={worldMoney < costOfNProduct(qtmulti) || qtmulti==0}>
-                    x{qtmulti} Prix: {costOfNProduct(qtmulti)}
+                    x{qtmulti} Prix: {transform(costOfNProduct(qtmulti))}
                 </button>
             </div>
             <div className="temps" id="tempsAvant">{!inFabric && <span>Temps: {prod.vitesse}ms</span>}</div>

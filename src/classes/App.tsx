@@ -25,16 +25,10 @@ function App() {
 
     function onUserNameChanged(){
         // @ts-ignore
-        let input = document.getElementById("usernameInput")
-        // @ts-ignore
-        if (input.textContent != "") {
-            // @ts-ignore
-            let new_username = input.textContent
-            // @ts-ignore
-            input.value = new_username
-            // @ts-ignore
-            setUsername(new_username)
-
+        let username = document.getElementById("usernameInput").value
+        if (username!=""){
+            localStorage.setItem("username", username);
+            setUsername(username)
         }
     }
     useEffect(() => {
@@ -61,7 +55,7 @@ function App() {
 
     function onProductionDone(p: Product): void {
         // calcul de la somme obtenue par la production du produit
-        let gain = p.revenu * p.quantite
+        let gain = p.revenu * p.quantite * (1+world.activeangels*world.angelbonus/100)
         // ajout de la somme à l’argent possédé
         // console.log("Gain")
         // console.log(gain)
@@ -86,6 +80,12 @@ function App() {
         console.log("Upgrade acheté")
         updateMoney(-seuil)
         services.putUpgrade(upgrade)
+    }
+
+    function onWorldReset():void{
+        services.deleteWorld()
+        // window.location.reload() // Je l'ai commenté parce que le reload se fait avant le delete, et le monde ne se reset pas
+        setTimeout(() => window.location.reload(), 500)
     }
 
     function updateMoney(gain:number){
@@ -208,7 +208,7 @@ function App() {
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span id="worldName"> {world.name} </span></div>
                 <div>
                     <img className='logomonnaie' alt='logo monnaie' src={logoMonnaie}></img>
-                    <span dangerouslySetInnerHTML={{__html: transform(world.money)}}></span>
+                    <span>{transform(world.money)}</span>
                 </div>
                 <div> <button id="commutateurButton" onClick={changeCommutator} type="button">x1</button></div>
                 <div> Username <input type="text" id="usernameInput"
@@ -276,6 +276,7 @@ function App() {
                                 services={services}
                                 afficheAngels={afficheAngels}
                                 hideAngels={hideAngels}
+                                onWorldReset={onWorldReset}
                                 />
                     </div>
                 } </div>

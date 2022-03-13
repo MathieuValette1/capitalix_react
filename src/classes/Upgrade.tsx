@@ -1,4 +1,5 @@
 import { Services } from "../service"
+import { transform } from "../utils"
 import { Pallier, Product, World } from "../world"
 
 type UpgradeProps = {
@@ -25,7 +26,7 @@ export default function UpgradeComponent({upgrade, services, world, onUpgradeBuy
             <div className="infosUpgrade">
                 <div className="upgradename"> { upgrade.name} </div>
                 <div className="produitcible"> Améliore {upgrade.typeratio} du produit : {world.products.product.find(produit => produit.id == upgrade.idcible)?.name}</div>
-                <div className="upgradecost"> Coût : { upgrade.seuil} </div>
+                <div className="upgradecost"> Coût : { transform(upgrade.seuil)} </div>
             </div>
             <div onClick={buyUpgrade}>
                 <button className="buybutton" disabled={world.money < upgrade.seuil}>Acheter !</button>
