@@ -214,7 +214,6 @@ function App() {
                 <div> Username <input type="text" id="usernameInput"
                                       value={username}
                                       onChange={onUserNameChanged}/>
-                    <button id="deletebutton" type="button">Delete world</button>
                 </div>
                 <span dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
             </div>

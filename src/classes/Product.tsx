@@ -36,6 +36,7 @@ export default function ProductComponent({ prod, world, services, onProductionDo
             if (prod.quantite>0) {
                 // console.log("Icone cliquée")
                 // console.log(prod.name)
+                setInFabric(true)
                 prod.timeleft = prod.vitesse
                 prod.lastupdate = Date.now()
 
@@ -105,6 +106,7 @@ export default function ProductComponent({ prod, world, services, onProductionDo
                 let revenu = prod.revenu
                 // Remettre la barre de progression à 0
                 prod.progressbarvalue = 0
+                setInFabric(false)
                 onProductionDone(prod)
                 calcMaxCanBuy()
                 if (prod.managerUnlocked){
