@@ -10,6 +10,7 @@ import Unlocks from './Unlocks';
 import Upgrades from './Upgrades';
 import Angels from './Angels';
 import { forEachLeadingCommentRange } from 'typescript';
+import logoMonnaie from '../images/monnaie.png'
 
 function App() {
     const [services, setServices] = useState(new Services(""))
@@ -206,8 +207,8 @@ function App() {
             <div className="header">
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span id="worldName"> {world.name} </span></div>
                 <div>
+                    <img className='logomonnaie' alt='logo monnaie' src={logoMonnaie}></img>
                     <span dangerouslySetInnerHTML={{__html: transform(world.money)}}></span>
-                    <img className='logomonnaie' alt='logo monnaie' src={'..\\images\\monnaie.png'}></img>
                 </div>
                 <div> <button id="commutateurButton" onClick={changeCommutator} type="button">x1</button></div>
                 <div> Username <input type="text" id="usernameInput"

@@ -109,3 +109,9 @@ li:hover {
   font-size: 50px;
   vertical-align: middle;
 }
+
+.logomonnaie {
+  max-height:5%;
+  width: auto;
+  vertical-align: middle;
+}
