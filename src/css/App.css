@@ -1,5 +1,13 @@
+@font-face {
+  font-family: "comix regular";
+  src: url(../font/COMI.TTF);
+}
+
 body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+  font-family: comix regular;
+  font-weight: bold;
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;} */
+}
 
 body::after {
   content: "";
@@ -64,10 +72,15 @@ body::after {
 .main {
   display: grid;
   grid-template-columns: 20% 80%;
+  vertical-align: middle;
+  text-align: center;
 }
 .products {
+  margin: 1.5%;
+  margin-right: 5%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 5%;
 }
 
 #logoMonde{
@@ -76,11 +89,15 @@ body::after {
   vertical-align: middle;
 }
 
+.menu {
+  margin: 20% 5%;
+  /* width: fit-content; */
+}
 ul {
   list-style-type: none;
-  margin: 0;
+  margin: auto;
   padding: 0;
-  width: 200px;
+  width: 100%;
   background-color: #f1f1f1;
 }
 

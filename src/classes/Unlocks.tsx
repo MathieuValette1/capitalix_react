@@ -57,8 +57,8 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
                 <h2 className="soustitre">Passe autant d'échelons que possible et maximise tes profits !</h2>
             </div>
             <div>
-                <button onClick={showNext} className="buttonnext">Prochains échelonix</button>
-                <button onClick={showGalerie} className="buttongalerie">Galerie</button>
+                <button onClick={showNext} className="unlockbutton" id="buttonnext">Prochains échelonix</button>
+                <button onClick={showGalerie} className="unlockbutton" id="buttongalerie">Galerie</button>
             </div>
             <div className="sousmodale" id="nextunlocks"> {afficheNext &&
                 <div className="unlocksgrid">
@@ -67,8 +67,8 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
                 </div>
             }</div>
             <div className="sousmodale" id="galerie"> {afficheGalerie &&
-                <div className="unlockgrid">
-                    <div>{world.products.product.map(produit =>
+                <div className="unlocksgrid">
+                    {world.products.product.map(produit =>
                         produit.palliers.pallier.map(unlock =>
                             <div key={unlock.idcible} className="unlock">
                                 <div className="unlockname">{unlock.name}</div>
@@ -89,7 +89,7 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
                             </div>)
                         }
                         {/* affichage des all unlocks */}
-                    </div>
+                    
                 </div>
             }</div>
         </div>

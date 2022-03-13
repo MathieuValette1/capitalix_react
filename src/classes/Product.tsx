@@ -4,6 +4,7 @@ import { Product, World } from "../world"
 import ProgressBar from "./ProgressBar"
 import '../css/Product.css'
 import { forEachLeadingCommentRange } from "typescript"
+import { time } from "console"
 
 type ProductProps = {
     prod: Product
@@ -16,6 +17,7 @@ type ProductProps = {
     checkAllUnlocks: (seuil : number) => void
 }
 export default function ProductComponent({ prod, world, services, onProductionDone, onProductBuy, worldMoney, qtmulti, checkAllUnlocks }: ProductProps) {
+    const [inFabric, setInFabric] = useState(false)
     const [progress, setProgress] = useState(((prod.vitesse - prod.timeleft) / prod.vitesse) * 100)
     const [quantite, setQuantite] = useState(prod.quantite)
     const [cost, setCost] = useState(prod.cout)
@@ -31,11 +33,11 @@ export default function ProductComponent({ prod, world, services, onProductionDo
 
     function startFabrication(){
         if (prod.quantite>0) {
+            setInFabric(true)
             // console.log("Icone cliquée")
             // console.log(prod.name)
             prod.timeleft = prod.vitesse
             prod.lastupdate = Date.now()
-
         }
     }
 
@@ -182,11 +184,12 @@ export default function ProductComponent({ prod, world, services, onProductionDo
         onProductBuy(cost, prod)
     }
 
+
     return (
         <div className="product" key={prod.id}>
             <div className="productInfo">
                 <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
-                <div className="qte">Quantité: {quantite}</div>
+                <div className="qte">Stock : {quantite}</div>
             </div>
             <div className="revenu">Revenu: {prod.revenu * prod.quantite}</div>
             <div className="prixStand">
@@ -194,10 +197,12 @@ export default function ProductComponent({ prod, world, services, onProductionDo
                     x{qtmulti} Prix: {costOfNProduct(qtmulti)}
                 </button>
             </div>
-            <div className="temps">Temps: {prod.vitesse}s</div>
+            <div className="temps" id="tempsAvant">{!inFabric && <span>Temps: {prod.vitesse}ms</span>}</div>
+            <div className="temps" id="tempsPendant">{inFabric && <span>Temps: {prod.timeleft}ms</span>}</div>
             <div className="progressBar">
-                <ProgressBar transitionDuration={"0.1s"} customLabel={" "} completed={progress}/>
+                <ProgressBar transitionDuration={"0.05s"} customLabel={" "} completed={progress}/>
             </div>
+            <div className="background"></div>
         </div>
     )
 }

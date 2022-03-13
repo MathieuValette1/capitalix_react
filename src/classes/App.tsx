@@ -213,14 +213,13 @@ function App() {
                 <div> <button id="commutateurButton" onClick={changeCommutator} type="button">x1</button></div>
                 <div> Username <input type="text" id="usernameInput"
                                       value={username}
-                                      onChange={onUserNameChanged}/></div>
-
+                                      onChange={onUserNameChanged}/>
+                    <button id="deletebutton" type="button">Delete world</button>
+                </div>
                 <span dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
-                <button id="deletebutton" type="button">Delete world</button>
-
             </div>
             <div className="main">
-                <div>
+                <div className='menu'>
                     <nav><ul>
                         <li onClick={afficheUnlocks}>Echelonix</li>
                         <li onClick={afficheManagers}>Directrix</li>
@@ -229,17 +228,17 @@ function App() {
                     </ul></nav>
                 </div>
 
-            <div className="products">
-                {world.products.product.map( p =>
-                    <ProductComponent prod={ p }
-                                      world = {world}
-                                      services={ services }
-                                      onProductionDone={onProductionDone}
-                                      onProductBuy={onProductBuy}
-                                      qtmulti = {qtmulti}
-                                      worldMoney = {world.money}
-                                      checkAllUnlocks = {checkAllUnlocks}
-                    />
+                <div className="products">
+                    {world.products.product.map( p =>
+                        <ProductComponent prod={ p }
+                                        world = {world}
+                                        services={ services }
+                                        onProductionDone={onProductionDone}
+                                        onProductBuy={onProductBuy}
+                                        qtmulti = {qtmulti}
+                                        worldMoney = {world.money}
+                                        checkAllUnlocks = {checkAllUnlocks}
+                        />
                     )}
                 </div>
                 <div className='modale'> { showManagers &&

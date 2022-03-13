@@ -2,9 +2,24 @@
     display: grid;
     grid-template-columns: 30% auto auto;
     grid-gap: 5px;
+    position: relative;
+}
+
+.background {
+    /* position: absolute; */
+    z-index: -0;
+    grid-column: 1/ span 6;
+    grid-row: 2/ span 5;
+    background-color: beige;
+    background-size: 10%;
+    border-radius: 30% 70% / 30% 70%;
+    opacity: 0.7;
+    margin: 2%;
+    margin-left: 15%;
 }
 
 .productInfo {
+    z-index: 1;
     grid-column: 1;
     grid-row: 1/6;
     display: grid;
@@ -12,6 +27,8 @@
     grid-gap: 5px;
     position: relative;
     text-align: center;
+    /* background-color: azure;
+    border-radius: 50%; */
 }
 
 .productLogo {
@@ -20,11 +37,12 @@
     vertical-align: middle;
     grid-column: 1;
     grid-row: 1/5;
+    
 }
 
 .qte {
     position: absolute;
-    bottom: -10%;
+    bottom: -70%;
     grid-column: 1;
     grid-row: 4;
     background-color: gray;
@@ -35,21 +53,25 @@
 }
 
 .revenu {
+    z-index: 1;
     grid-column: 2/4;
     grid-row: 3;
 }
 
 .prixStand {
+    z-index: 1;
     grid-column: 2;
     grid-row: 4;
 }
 
 .temps {
+    z-index: 2;
     grid-column: 3;
     grid-row: 4;
 }
 
 .progressBar {
-    grid-column: 2/4;
-    grid-row: 2;
+    z-index: 1;
+    grid-column: 3;
+    grid-row: 4;
 }
