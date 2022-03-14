@@ -214,7 +214,7 @@ export default function ProductComponent({ prod, world, services, onProductionDo
                     </div>
                     <div className="revenu">Revenu: {transform(prod.revenu * prod.quantite)}</div>
                     <div className="prixStand">
-                        <button type="button" onClick={buyProduct} disabled={worldMoney < costOfNProduct(qtmulti) || qtmulti==0}>
+                        <button className="buyproductbutton" type="button" onClick={buyProduct} disabled={worldMoney < costOfNProduct(qtmulti) || qtmulti==0}>
                             x{qtmulti} Prix: {transform(costOfNProduct(qtmulti))}
                         </button>
                     </div>
