@@ -197,10 +197,57 @@ export default function ProductComponent({ prod, world, services, onProductionDo
         onProductBuy(cost, prod)
     }
 
+    function buyFirstProduct(){
+        if(prod.cout <= worldMoney){
+            buyProduct()
+            afficheProduit()
+        }
+    }
+
+    function afficheProduit(){
+        if(prod.quantite > 0){
+            return(
+                <div className="unlockedproduct">
+                    <div className="productInfo">
+                        <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
+                        <div className="qte">Stock : {quantite}</div>
+                    </div>
+                    <div className="revenu">Revenu: {transform(prod.revenu * prod.quantite)}</div>
+                    <div className="prixStand">
+                        <button type="button" onClick={buyProduct} disabled={worldMoney < costOfNProduct(qtmulti) || qtmulti==0}>
+                            x{qtmulti} Prix: {transform(costOfNProduct(qtmulti))}
+                        </button>
+                    </div>
+                    <div className="temps" id="tempsAvant">{!inFabric && <span>Temps: {prod.vitesse}ms</span>}</div>
+                    <div className="temps" id="tempsPendant">{inFabric && <span>Temps: {prod.timeleft}ms</span>}</div>
+                    <div className="progressBar">
+                        <ProgressBar transitionDuration={"0.05s"} customLabel={" "} completed={progress}/>
+                    </div>
+                    <div className="background"></div>
+                </div>
+            )
+        }
+        else {
+            return(
+                <button className="unlockLockedProduct" disabled={prod.quantite==0 && prod.cout>worldMoney} onClick={buyFirstProduct}>
+                    <div className="lockedProduct">
+                        <div className="productInfo">
+                            <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
+                            <div className="qte">Stock : {quantite}</div>
+                        </div>
+                        <div className="productLockedName">{prod.name}</div>
+                        <div className="productLockedCost">{prod.cout}</div>
+                        <div className="background"></div>
+                    </div>
+                </button>
+            )
+        }
+    }
 
     return (
         <div className="product" key={prod.id}>
-            <div className="productInfo">
+            {afficheProduit()}
+            {/* <div className="productInfo">
                 <img onClick={startFabrication} className="productLogo" src={services.server + prod.logo} alt={prod.logo}/>
                 <div className="qte">Stock : {quantite}</div>
             </div>
@@ -215,7 +262,7 @@ export default function ProductComponent({ prod, world, services, onProductionDo
             <div className="progressBar">
                 <ProgressBar transitionDuration={"0.05s"} customLabel={" "} completed={progress}/>
             </div>
-            <div className="background"></div>
+            <div className="background"></div> */}
         </div>
     )
 }

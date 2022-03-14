@@ -1,8 +1,32 @@
-.product {
+.unlockedproduct {
     display: grid;
     grid-template-columns: 30% auto auto;
     grid-gap: 5px;
     position: relative;
+}
+
+.lockedProduct {
+    display: grid;
+    grid-template-columns: 30% auto auto;
+    grid-gap: 5px;
+    position: relative;
+}
+
+@font-face {
+    font-family: "comix regular";
+    src: url(../font/COMI.TTF);
+}
+
+.unlockLockedProduct {
+    background: none;
+    border: none;
+    /* color: black; */
+    font-family: comix regular;
+    font-weight: bold;
+}
+
+.unlockLockedProduct:disabled>.lockedProduct>.background {
+    background-color: rgb(161, 161, 161) ;
 }
 
 .background {
@@ -46,7 +70,7 @@
     grid-column: 1;
     grid-row: 4;
     background-color: gray;
-    border-radius: 20px;
+    border-radius: 30% 70% / 30% 70%;
     padding: 5px 30px 5px 30px;
     width: auto;
     height: auto;
@@ -73,5 +97,29 @@
 .progressBar {
     z-index: 1;
     grid-column: 3;
+    grid-row: 4;
+}
+
+/* .lockedproduct > .background {
+    z-index: 0;
+    grid-column: 1/ span 6;
+    grid-row: 2/ span 5;
+    background-color: beige;
+    background-size: 10%;
+    border-radius: 30% 70% / 30% 70%;
+    opacity: 0.7;
+    margin: 2%;
+    margin-left: 15%;
+} */
+
+.productLockedName {
+    z-index: 1;
+    grid-column: 2/4;
+    grid-row: 3;
+}
+
+.productLockedCost {
+    z-index: 1;
+    grid-column: 2/4;
     grid-row: 4;
 }
