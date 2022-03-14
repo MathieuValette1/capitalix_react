@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "comix regular";
+    src: url(../font/COMI.TTF);
+}
+
 .modal {
     z-index: 2; /* au dessus du reste */
     position: absolute;
@@ -13,17 +18,19 @@
     overflow: auto; /* barre de scroll si besoin */
     background-color: white; /* opaque */
     border: solid;
-    /* padding-top:10%; a 10% du haut */
-    /* padding-left:20%; a 20% de la gauche */
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 0.6cm;
 }
 
 .sousmodale {
     position: absolute;
     margin: auto;
-    width: 950px;
-    height: 400px;
+    width: 990px;
+    height: 440px;
     bottom: 10px;
     overflow: auto;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .closebutton{
@@ -34,16 +41,30 @@
     padding:1em 1.2em;
     font-weight: bold;
     font-size: large;
+    color: red;
+    box-shadow: 0 5px 10px rgba(119, 0, 0, 0.3);
+    cursor: pointer;
+    background-color: white;
+    border: none;
+}
+.closebutton:active{
+    box-shadow: none;
 }
 
 .soustitre {
     font-weight: normal;
     font-style: italic;
+    font-size:medium;
 }
 .managergrid {
     display: grid;
     grid-template-columns: 30% auto 20%;
     align-items: center;
+    position: relative;
+    background-color: rgba(245, 245, 220, 0.7);
+    border-radius: 30% 70% / 30% 70%;
+    background-size: 10%;
+    margin: 2%;
 }
 
 .logo {
@@ -56,29 +77,36 @@
 }
 .buybutton {
     display:inline-block;
-    padding:0.7em 1.7em;
+    padding:0.7em 2em;
     margin:0 0.3em 0.3em 0;
-    border-radius:0.2em;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-family:'Roboto',sans-serif;
-    font-weight:400;
-    color:#FFFFFF;
-    background-color:rgb(255, 93, 93);
-    box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+    border-radius:50%;
+    font-weight:bolder;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: none;
+    background-color: white;
     text-align:center;
     position:relative;
+    font-family: comix regular;
+    color: rgb(0, 0, 116);
+    font-size: 1.1em;
 }
 .buybutton:disabled {
-    background-color: rgb(175, 175, 175);
+    background-color: white !important;
+    cursor: default;
+    color: rgb(150, 150, 150);
 }
 .buybutton:active {
-    box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+    box-shadow: none;
+}
+.buybutton:hover {
+    background-color: beige;
 }
 
 .unlocksgrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
 }
 .unlock {
     margin: 5px;
@@ -90,22 +118,37 @@
 }
 .unlockbutton {
     display:inline-block;
-    padding:0.3em 1.3em;
-    margin:0 3em 3em 0;
-    border-radius:0.2em;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-family:'Roboto',sans-serif;
-    font-weight:400;
-    color:#FFFFFF;
-    background-color:rgb(255, 93, 93);
-    box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+    padding:0.4em 2em;
+    margin:0 2em 0 2em;
+    border-radius:50%;
+    font-weight:bolder;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: none;
+    background-color: white;
     text-align:center;
     position:relative;
+    font-family: comix regular;
+    /* font-size: 1.1em; */
+}
+.unlockbutton:active {
+    box-shadow: none;
+}
+.unlockbutton:hover {
+    background-color: beige;
 }
 
 .upgradegrid {
     display: grid;
     grid-template-columns: 30% auto 20%;
     align-items: center;
+    background-color: rgba(245, 245, 220, 0.7);
+    border-radius: 30% 70% / 30% 70%;
+    background-size: 10%;
+    margin: 2%; 
+}
+
+.unlockfield:disabled {
+    background-color: rgb(170, 170, 170);
+    color: rgb(56, 56, 56);
 }

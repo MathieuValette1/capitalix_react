@@ -32,7 +32,7 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
             <div key={nextUnlock.at(0)?.idcible} className="unlock">
                 <div>{nextUnlock.at(0)?.name}</div>
                 <img alt="unlock logo" className="unlocklogo" src= {services.server + nextUnlock.at(0)?.logo} />
-                <div className="unlockcost"> { nextUnlock.at(0)?.seuil} </div>
+                <div className="unlockcost">coût : { nextUnlock.at(0)?.seuil} </div>
             </div>
         )// retourne les infos relatives au premier des échelons pas encore débloqués du produit
     }
@@ -44,9 +44,41 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
             <div key={nextAllUnlock.at(0)?.idcible} className="unlock">
                 <div>{nextAllUnlock.at(0)?.name}</div>
                 <img alt="allunlock logo" className="unlocklogo" src= {services.server + nextAllUnlock.at(0)?.logo} />
-                <div className="allunlockcost"> { nextAllUnlock.at(0)?.seuil} </div>
+                <div className="allunlockcost">coût : { nextAllUnlock.at(0)?.seuil} </div>
             </div>
         )// retourne les infos relatives au premier des allunlocks pas encore débloqués
+    }
+
+    function afficheUnlocksGalerie (unlock: Pallier) {
+        let produitcible;
+        if(unlock.unlocked){
+            if(unlock.idcible==0){produitcible="s'applique à tous les produits"}
+            else{produitcible="s'applique sur le produit " + world.products.product[unlock.idcible-1].name}
+            return (
+                <fieldset className="unlockfield">
+                <div key={unlock.idcible} className="unlock">
+                    <div className="unlockname"> { unlock.name} </div>
+                    <img alt="unlock logo" className="unlocklogo" src= {services.server + unlock.logo} />
+                    <div className="seuilunlock">coût : { unlock.seuil} </div>
+                    <div className="produitcible"> {produitcible} </div>
+                </div>
+                </fieldset>
+            )
+        }
+        else{
+            if(unlock.idcible==0){produitcible="s'applique à tous les produits"}
+            else{produitcible="s'applique sur le produit " + world.products.product[unlock.idcible-1].name}
+            return (
+                <fieldset className="unlockfield" disabled>
+                <div key={unlock.idcible} className="unlock">
+                    <div className="unlockname"> { unlock.name} </div>
+                    <img alt="unlock logo" className="unlocklogo" src= {services.server + unlock.logo} />
+                    <div className="seuilunlock">coût : { unlock.seuil} </div>
+                    <div className="produitcible"> {produitcible} </div>
+                </div>
+                </fieldset>
+            )
+        }
     }
 
     return (
@@ -70,24 +102,12 @@ export default function Angels({world, services, afficheUnlocks, hideUnlocks}: U
                 <div className="unlocksgrid">
                     {world.products.product.map(produit =>
                         produit.palliers.pallier.map(unlock =>
-                            <div key={unlock.idcible} className="unlock">
-                                <div className="unlockname">{unlock.name}</div>
-                                <img alt="unlock logo" className="unlocklogo" src= {services.server + unlock.logo} />
-                                <div className="seuilunlock"> { unlock.seuil} </div>
-                                <div className="produitcible"> {world.products.product[unlock.idcible-1].name } </div>
-                            </div>
+                            afficheUnlocksGalerie(unlock)
                         ))} 
                         {/* affichage des unlocks de produits */}
                         {world.allunlocks.pallier.map(unlock =>
-                            <div key={unlock.idcible} className="unlock">
-                                <div className="infosmanager">
-                                    <div className="managername"> { unlock.name} </div>
-                                    <img alt="unlock logo" className="unlocklogo" src= {services.server + unlock.logo} />
-                                    <div className="seuilunlock"> { unlock.seuil} </div>
-                                    <div className="produitcible"> all </div>
-                                </div>
-                            </div>)
-                        }
+                            afficheUnlocksGalerie(unlock)
+                        )}
                         {/* affichage des all unlocks */}
                     
                 </div>

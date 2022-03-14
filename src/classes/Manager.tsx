@@ -26,6 +26,7 @@ export default function ManagerComponent({manager, services, world, onManagerBuy
     }
     return (
         <div key={manager.idcible} className="managergrid">
+            {/* <div className="managerbackground"></div> */}
             <div>
                 <div>
                     <img alt="manager logo" className="logo" src= {services.server + manager.logo} />

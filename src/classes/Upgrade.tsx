@@ -19,7 +19,7 @@ export default function UpgradeComponent({upgrade, services, world, onUpgradeBuy
     }
 
     return (
-        <div key={upgrade.idcible} className="upgradegrid">
+        <div  className="upgradegrid">
             <div>
                 <img alt="upgrade logo" className="logo" src={services.server + upgrade.logo} />
             </div>

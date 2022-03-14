@@ -206,7 +206,7 @@ function App() {
         <div className="App">
             <div className="header">
                 <div> <img id="logoMonde" src={services.server + world.logo} alt={"logo.png"}/><span id="worldName"> {world.name} </span></div>
-                <div>
+                <div className='argent'>
                     <img className='logomonnaie' alt='logo monnaie' src={logoMonnaie}></img>
                     <span>{transform(world.money)}</span>
                 </div>
@@ -215,7 +215,7 @@ function App() {
                                       value={username}
                                       onChange={onUserNameChanged}/>
                 </div>
-                <span dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
+                <span className='score' dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
             </div>
             <div className="main">
                 <div className='menu'>
