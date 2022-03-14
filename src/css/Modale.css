@@ -55,6 +55,8 @@
     font-weight: normal;
     font-style: italic;
     font-size:medium;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 .managergrid {
     display: grid;
@@ -151,4 +153,45 @@
 .unlockfield:disabled {
     background-color: rgb(170, 170, 170);
     color: rgb(56, 56, 56);
+}
+
+.logoSanglier {
+    max-height: 300px;
+    width: auto;
+}
+
+#deletebutton {
+    display:inline-block;
+    padding:0.4em 2em;
+    margin:0 2em 0 2em;
+    border-radius:50%;
+    font-weight:bolder;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    text-align:center;
+    position:relative;
+    font-family: comix regular;
+}
+
+#deletebutton:active {
+    box-shadow: none;
+}
+#deletebutton:hover {
+    background-color: beige;
+}
+
+.angelgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.angelgrid>div{
+    background-color: rgba(245, 245, 220, 0.7);
+    border-radius: 30% 70% / 30% 70%;
+    background-size: 50%;
+    margin: 2%;
 }

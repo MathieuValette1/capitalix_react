@@ -25,7 +25,9 @@ export default function UpgradeComponent({upgrade, services, world, onUpgradeBuy
             </div>
             <div className="infosUpgrade">
                 <div className="upgradename"> { upgrade.name} </div>
-                <div className="produitcible"> Améliore {upgrade.typeratio} du produit : {world.products.product.find(produit => produit.id == upgrade.idcible)?.name}</div>
+                <div className="produitcible"> Améliore {upgrade.typeratio} du produit : 
+                    {world.products.product.find(produit => produit.id == upgrade.idcible)?.name}
+                </div>
                 <div className="upgradecost"> Coût : { transform(upgrade.seuil)} </div>
             </div>
             <div onClick={buyUpgrade}>

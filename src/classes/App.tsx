@@ -215,7 +215,7 @@ function App() {
                                       value={username}
                                       onChange={onUserNameChanged}/>
                 </div>
-                <span className='score' dangerouslySetInnerHTML={{__html: transform(world.score)}}/>
+                <span className='score' >Score: {transform(world.score)}</span>
             </div>
             <div className="main">
                 <div className='menu'>

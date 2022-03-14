@@ -117,6 +117,8 @@ li:hover {
   height: 7em; /* hauteur du parent */
   line-height: 7em; /* hauteur de ligne (identique) */
   white-space: nowrap; /* interdiction de passer à la ligne */
+  /* background-image: linear-gradient(180deg, rgba(255,255,255,0) 0, rgba(255,255,255,1) 100%); */
+
 }
 
 #worldName {
@@ -148,6 +150,7 @@ li:hover {
     cursor: pointer;
     border: none;
     background-color: white;
+    font-family: comix regular;
 }
 #commutateurButton:hover {
   background-color: beige;
